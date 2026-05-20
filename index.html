@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font-sans,system-ui,sans-serif);font-size:15px;color:var(--color-text-primary);background:transparent;padding:1.5rem}
+h1{font-size:18px;font-weight:500;margin-bottom:0.25rem}
+.subtitle{font-size:13px;color:var(--color-text-secondary);margin-bottom:2rem}
+.section{margin-bottom:2rem}
+.section-title{font-size:13px;font-weight:500;text-transform:uppercase;letter-spacing:0.06em;color:var(--color-text-secondary);margin-bottom:1rem;padding-bottom:0.5rem;border-bottom:0.5px solid var(--color-border-tertiary)}
+.field{margin-bottom:1.25rem}
+label{display:block;font-size:14px;font-weight:500;margin-bottom:0.4rem;color:var(--color-text-primary)}
+.hint{font-size:12px;color:var(--color-text-secondary);margin-top:0.25rem}
+input[type=text],textarea{width:100%;padding:8px 10px;border:0.5px solid var(--color-border-secondary);border-radius:var(--border-radius-md);font-size:14px;font-family:inherit;color:var(--color-text-primary);background:var(--color-background-primary)}
+textarea{resize:vertical;min-height:64px}
+.radio-group{display:flex;gap:1rem;margin-top:0.4rem}
+.radio-opt{display:flex;align-items:center;gap:6px;cursor:pointer;font-size:14px;padding:6px 16px;border:0.5px solid var(--color-border-secondary);border-radius:20px;transition:all 0.15s;user-select:none}
+.radio-opt:hover{background:var(--color-background-secondary)}
+.radio-opt.checked-si{background:var(--color-background-success);border-color:var(--color-border-success);color:var(--color-text-success);font-weight:500}
+.radio-opt.checked-no{background:var(--color-background-danger);border-color:var(--color-border-danger);color:var(--color-text-danger);font-weight:500}
+.checkbox-group{display:flex;flex-direction:column;gap:8px;margin-top:0.4rem}
+.check-opt{display:flex;align-items:center;gap:8px;font-size:14px;cursor:pointer;padding:4px 0}
+.check-opt input{width:auto}
+.conditional{margin-top:0.75rem;padding:0.75rem 1rem;background:var(--color-background-secondary);border-radius:var(--border-radius-md);border-left:2px solid var(--color-border-secondary);display:none}
+.conditional.visible{display:block}
+.conditional label{font-size:13px;color:var(--color-text-secondary);font-weight:400}
+.progress-bar{height:4px;background:var(--color-background-secondary);border-radius:2px;margin-bottom:2rem;overflow:hidden}
+.progress-fill{height:100%;background:var(--color-text-primary);border-radius:2px;transition:width 0.4s ease;opacity:0.2}
+.nav{display:flex;justify-content:space-between;align-items:center;margin-top:2rem;padding-top:1.5rem;border-top:0.5px solid var(--color-border-tertiary)}
+.nav button{padding:8px 20px;border-radius:var(--border-radius-md);font-size:14px;font-family:inherit;cursor:pointer;border:0.5px solid var(--color-border-secondary);background:var(--color-background-primary);color:var(--color-text-primary)}
+.nav button.primary{background:var(--color-text-primary);color:var(--color-background-primary);border-color:var(--color-text-primary);font-weight:500}
+.nav button.primary:hover{opacity:0.85}
+.nav button:disabled{opacity:0.35;pointer-events:none}
+.step-indicator{font-size:13px;color:var(--color-text-secondary)}
+.page{display:none}.page.active{display:block}
+.role-cards{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1rem}
+.role-card{border:0.5px solid var(--color-border-secondary);border-radius:var(--border-radius-lg);padding:1.25rem 1rem;cursor:pointer;transition:all 0.15s;text-align:center;background:var(--color-background-primary)}
+.role-card:hover{background:var(--color-background-secondary)}
+.role-card.selected{border:2px solid var(--color-text-primary)}
+.role-card .role-icon{font-size:28px;margin-bottom:0.5rem;color:var(--color-text-secondary)}
+.role-card .role-label{font-size:14px;font-weight:500}
+.role-card .role-desc{font-size:12px;color:var(--color-text-secondary);margin-top:4px}
+.summary-block{background:var(--color-background-secondary);border-radius:var(--border-radius-lg);padding:1.25rem;margin-bottom:1rem}
+.summary-block h3{font-size:13px;font-weight:500;color:var(--color-text-secondary);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:0.75rem}
+.summary-row{display:flex;gap:1rem;padding:6px 0;border-bottom:0.5px solid var(--color-border-tertiary);font-size:13px;align-items:flex-start}
+.summary-row:last-child{border-bottom:none}
+.summary-q{color:var(--color-text-secondary);flex:2}
+.summary-a{flex:1;font-weight:500}
+.badge{display:inline-block;padding:2px 8px;border-radius:20px;font-size:12px;font-weight:500}
+.badge-yes{background:var(--color-background-success);color:var(--color-text-success)}
+.badge-no{background:var(--color-background-danger);color:var(--color-text-danger)}
+.badge-na{background:var(--color-background-secondary);color:var(--color-text-secondary)}
+.role-pill{display:inline-block;background:var(--color-background-secondary);border:0.5px solid var(--color-border-secondary);padding:3px 12px;border-radius:20px;font-size:12px;font-weight:500;margin-bottom:1rem}
+.export-grid{display:grid;grid-template-columns:1fr 1fr;gap:0.75rem;margin-top:1rem}
+.export-btn{padding:10px 16px;border-radius:var(--border-radius-md);font-size:14px;font-weight:500;cursor:pointer;font-family:inherit;display:flex;align-items:center;justify-content:center;gap:7px;transition:all 0.15s}
+.btn-csv{background:var(--color-text-primary);color:var(--color-background-primary);border:none}
+.btn-csv:hover{opacity:0.85}
+.btn-pdf{background:transparent;color:var(--color-text-primary);border:0.5px solid var(--color-border-secondary)}
+.btn-pdf:hover{background:var(--color-background-secondary)}
+.required{color:var(--color-text-danger)}
+.toast{position:fixed;bottom:1.5rem;left:50%;transform:translateX(-50%);background:var(--color-text-primary);color:var(--color-background-primary);padding:10px 20px;border-radius:var(--border-radius-md);font-size:13px;font-weight:500;opacity:0;transition:opacity 0.3s;pointer-events:none;z-index:999}
+.toast.show{opacity:1}
+</style>
+</head>
+<body>
+<h2 style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)">Questionario BPM Governance e gestione flussi</h2>
+<h1>Governance e gestione flussi</h1>
+<p class="subtitle">Questionario BPM — SD3 · v1.0 · 15/05/2026 · Regione Emilia-Romagna</p>
+<div class="progress-bar"><div class="progress-fill" id="progress" style="width:0%"></div></div>
+
+<!-- PAGE 0 -->
+<div class="page active" id="page0">
+<div class="section">
+  <div class="section-title">Ruolo</div>
+  <div class="field">
+    <label>Sei il referente tecnico o organizzativo? <span class="required">*</span></label>
+    <div class="role-cards">
+      <div class="role-card" id="card-tecnico" onclick="selectRole('tecnico')">
+        <div class="role-icon"><i class="ti ti-settings-2" aria-hidden="true"></i></div>
+        <div class="role-label">Referente tecnico</div>
+        <div class="role-desc">Gestione sistemi, flussi e trasmissioni</div>
+      </div>
+      <div class="role-card" id="card-organizzativo" onclick="selectRole('organizzativo')">
+        <div class="role-icon"><i class="ti ti-users" aria-hidden="true"></i></div>
+        <div class="role-label">Referente organizzativo</div>
+        <div class="role-desc">Governance, qualità e reportistica</div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="nav"><span></span><span></span><button class="primary" id="btn-start" onclick="startQuestionnaire()" disabled>Inizia →</button></div>
+</div>
+
+<!-- TECNICO T1 -->
+<div class="page" id="pageT1">
+<div class="section">
+  <div class="section-title">1 · Identificazione</div>
+  <div class="field"><label>Flusso di riferimento <span class="required">*</span></label><input type="text" id="t_flusso" placeholder="Es. Flusso HSP.11bis, SDO..."></div>
+  <div class="field"><label>Nome e Cognome dei Referenti <span class="required">*</span></label><textarea id="t_referenti" placeholder="Inserire nome e cognome di ciascun referente che risponde al questionario"></textarea></div>
+</div>
+<div class="nav"><button onclick="goTo('page0',0,8)">← Indietro</button><span class="step-indicator">Sezione 1 di 6</span><button class="primary" onclick="goTo('pageT2',2,8)">Avanti →</button></div>
+</div>
+
+<!-- TECNICO T2 -->
+<div class="page" id="pageT2">
+<div class="section">
+  <div class="section-title">2 · Acquisizione del dato</div>
+  <div class="field"><label>Il data entry viene effettuato su gestionali aziendali propri?</label><div class="radio-group" data-name="tq_gestionale"></div><div class="conditional" id="tc_gestionale"><label>Specificare il nome dell'applicativo regionale utilizzato</label><input type="text" id="tc_gestionale_txt" placeholder="Nome applicativo..."></div></div>
+  <div class="field"><label>Il flusso viene acquisito tramite il Portale di accoglienza Flussi regionale SISEPS?</label><div class="radio-group" data-name="tq_siseps"></div><div class="conditional" id="tc_siseps"><label>Specificare il canale/modalità alternativa utilizzata</label><input type="text" id="tc_siseps_txt" placeholder="Es. integrazione applicativo regionale - DWH..."></div></div>
+</div>
+<div class="nav"><button onclick="goTo('pageT1',1,8)">← Indietro</button><span class="step-indicator">Sezione 2 di 6</span><button class="primary" onclick="goTo('pageT3',3,8)">Avanti →</button></div>
+</div>
+
+<!-- TECNICO T3 -->
+<div class="page" id="pageT3">
+<div class="section">
+  <div class="section-title">3 · Livelli di controllo SISEPS</div>
+  <div class="field">
+    <label>Quali fasi sono attive per il flusso all'interno del Portale Flussi SISEPS?</label>
+    <div class="checkbox-group">
+      <label class="check-opt"><input type="checkbox" id="tck_sim"> Simulazione invio</label>
+      <label class="check-opt"><input type="checkbox" id="tck_cons"> Consolidamento dati</label>
+      <label class="check-opt"><input type="checkbox" id="tck_auth"> Autorizzazione caricamento dati</label>
+      <label class="check-opt"><input type="checkbox" id="tck_none"> Nessuna delle precedenti</label>
+    </div>
+  </div>
+  <div class="field"><label>Sono previsti controlli logico-formali scartanti sul flusso in SISEPS?</label><div class="radio-group" data-name="tq_controlli"></div><div class="conditional" id="tc_controlli"><label>Specificare su quale sistema avvengono i controlli o se non avvengono</label><input type="text" id="tc_controlli_txt" placeholder="Es. applicativo di data entry..."></div></div>
+</div>
+<div class="nav"><button onclick="goTo('pageT2',2,8)">← Indietro</button><span class="step-indicator">Sezione 3 di 6</span><button class="primary" onclick="goTo('pageT4',4,8)">Avanti →</button></div>
+</div>
+
+<!-- TECNICO T4 -->
+<div class="page" id="pageT4">
+<div class="section">
+  <div class="section-title">4 · Azioni correttive</div>
+  <div class="field"><label>In caso di scarto del record, viene trasmesso un ritorno informativo all'Azienda?</label><div class="radio-group" data-name="tq_ritorno"></div><div class="conditional" id="tc_ritorno"><label>Specificare la modalità di gestione degli scarti adottata</label><textarea id="tc_ritorno_txt"></textarea></div></div>
+  <div class="field"><label>La gestione del ritorno informativo è affidata al referente tecnico?</label><div class="radio-group" data-name="tq_ref_tec"></div><div class="conditional" id="tc_ref_tec"><label>Specificare quale altro attore gestisce la trasmissione del ritorno informativo</label><input type="text" id="tc_ref_tec_txt"></div></div>
+  <div class="field"><label>Viene monitorata la correzione degli scarti del flusso regionale da parte delle Aziende?</label><div class="radio-group" data-name="tq_monit"></div><div class="conditional" id="tc_monit"><label>Specificare se e come si tiene traccia delle azioni correttive</label><textarea id="tc_monit_txt"></textarea></div></div>
+  <div class="field"><label>Sono previsti solleciti alle Aziende in caso di mancata correzione degli scarti?</label><div class="radio-group" data-name="tq_solleciti"></div><div class="conditional" id="tc_solleciti"><label>Specificare il meccanismo di escalation o se non è presente</label><input type="text" id="tc_solleciti_txt"></div></div>
+</div>
+<div class="nav"><button onclick="goTo('pageT3',3,8)">← Indietro</button><span class="step-indicator">Sezione 4 di 6</span><button class="primary" onclick="goTo('pageT5',5,8)">Avanti →</button></div>
+</div>
+
+<!-- TECNICO T5 -->
+<div class="page" id="pageT5">
+<div class="section">
+  <div class="section-title">5 · Conservazione e trasmissione verso enti terzi</div>
+  <div class="field"><label>Il flusso regionale viene archiviato nel DWH regionale di Livello 0?</label><div class="radio-group" data-name="tq_dwh0"></div><div class="conditional" id="tc_dwh0"><label>Specificare dove e con quale modalità viene conservato il dato</label><input type="text" id="tc_dwh0_txt"></div></div>
+  <div class="field"><label>Il flusso regionale viene trasmesso a Enti Terzi?</label><div class="radio-group" data-name="tq_enti"></div><div class="conditional" id="tc_enti"><label>Specificare se il processo si conclude con l'archiviazione del flusso regionale</label><input type="text" id="tc_enti_txt"></div></div>
+  <div class="field"><label>Il processo di trascodifica, controlli e generazione del flusso per l'Ente Terzo è gestito dal fornitore/referente tecnico?</label><div class="radio-group" data-name="tq_trascodifica"></div><div class="conditional" id="tc_trascodifica"><label>Specificare chi gestisce questa fase</label><input type="text" id="tc_trascodifica_txt"></div></div>
+  <div class="field"><label>Il processo di trasmissione del flusso verso l'Ente Terzo è gestito dal referente tecnico?</label><div class="radio-group" data-name="tq_trasmissione"></div><div class="conditional" id="tc_trasmissione"><label>Specificare chi gestisce questa fase</label><input type="text" id="tc_trasmissione_txt"></div></div>
+  
