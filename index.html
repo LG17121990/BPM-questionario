@@ -3,695 +3,416 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Questionario BPM — Governance e gestione flussi</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:var(--font-sans,system-ui,sans-serif);font-size:15px;color:var(--color-text-primary);background:transparent;padding:1.5rem}
-h1{font-size:18px;font-weight:500;margin-bottom:0.25rem}
-.subtitle{font-size:13px;color:var(--color-text-secondary);margin-bottom:2rem}
-.section{margin-bottom:2rem}
-.section-title{font-size:13px;font-weight:500;text-transform:uppercase;letter-spacing:0.06em;color:var(--color-text-secondary);margin-bottom:1rem;padding-bottom:0.5rem;border-bottom:0.5px solid var(--color-border-tertiary)}
-.field{margin-bottom:1.25rem}
-label{display:block;font-size:14px;font-weight:500;margin-bottom:0.4rem;color:var(--color-text-primary)}
-.hint{font-size:12px;color:var(--color-text-secondary);margin-top:0.25rem}
-input[type=text],textarea{width:100%;padding:8px 10px;border:0.5px solid var(--color-border-secondary);border-radius:var(--border-radius-md);font-size:14px;font-family:inherit;color:var(--color-text-primary);background:var(--color-background-primary)}
+body{font-family:system-ui,sans-serif;font-size:15px;color:#1a1a1a;background:#fff;padding:1.5rem;max-width:720px;margin:0 auto}
+h1{font-size:18px;font-weight:500;margin-bottom:4px}
+.sub{font-size:13px;color:#666;margin-bottom:2rem}
+.sec-title{font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:#666;margin-bottom:1rem;padding-bottom:.5rem;border-bottom:1px solid #eee}
+.field{margin-bottom:1.2rem}
+.field>label{display:block;font-size:14px;font-weight:500;margin-bottom:.4rem;line-height:1.4}
+.hint{font-size:12px;color:#888;margin-top:3px;font-style:italic}
+input[type=text],textarea{width:100%;padding:8px 10px;border:1px solid #ddd;border-radius:6px;font-size:14px;font-family:inherit;color:#1a1a1a;background:#fff}
+input[type=text]:focus,textarea:focus{outline:none;border-color:#555}
 textarea{resize:vertical;min-height:64px}
-.radio-group{display:flex;gap:1rem;margin-top:0.4rem}
-.radio-opt{display:flex;align-items:center;gap:6px;cursor:pointer;font-size:14px}
-.radio-opt input{width:auto;accent-color:#5B50D6}
-.checkbox-group{display:flex;flex-direction:column;gap:8px;margin-top:0.4rem}
-.check-opt{display:flex;align-items:center;gap:8px;font-size:14px;cursor:pointer}
-.check-opt input{width:auto;accent-color:#5B50D6}
-.conditional{margin-top:0.75rem;padding:0.75rem 1rem;background:var(--color-background-secondary);border-radius:var(--border-radius-md);border-left:2px solid #B4B2A9;display:none}
-.conditional.visible{display:block}
-.conditional label{font-size:13px;color:var(--color-text-secondary);font-weight:400}
-.progress-bar{height:4px;background:var(--color-background-secondary);border-radius:2px;margin-bottom:2rem;overflow:hidden}
-.progress-fill{height:100%;background:#5B50D6;border-radius:2px;transition:width 0.4s ease}
-.nav{display:flex;justify-content:space-between;align-items:center;margin-top:2rem;padding-top:1.5rem;border-top:0.5px solid var(--color-border-tertiary)}
-.nav button{padding:8px 20px;border-radius:var(--border-radius-md);font-size:14px;font-family:inherit;cursor:pointer;border:0.5px solid var(--color-border-secondary);background:var(--color-background-primary);color:var(--color-text-primary)}
-.nav button.primary{background:#5B50D6;color:#fff;border-color:#5B50D6;font-weight:500}
-.nav button:hover{background:var(--color-background-secondary)}
-.nav button.primary:hover{background:#4840b8}
-.step-indicator{font-size:13px;color:var(--color-text-secondary);text-align:center;flex:1}
-.page{display:none}.page.active{display:block}
-.role-cards{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1rem}
-.role-card{border:0.5px solid var(--color-border-secondary);border-radius:var(--border-radius-lg);padding:1.25rem 1rem;cursor:pointer;transition:border-color 0.15s,background 0.15s;text-align:center}
-.role-card:hover{background:var(--color-background-secondary)}
-.role-card.selected{border:2px solid #5B50D6;background:var(--color-background-primary)}
-.role-card .role-icon{font-size:28px;color:#5B50D6;margin-bottom:0.5rem}
-.role-card .role-label{font-size:15px;font-weight:500}
-.role-card .role-desc{font-size:12px;color:var(--color-text-secondary);margin-top:0.25rem}
-.summary-block{background:var(--color-background-secondary);border-radius:var(--border-radius-lg);padding:1.25rem;margin-bottom:1rem}
-.summary-block h3{font-size:13px;font-weight:500;color:var(--color-text-secondary);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:0.75rem}
-.summary-row{display:flex;gap:1rem;padding:6px 0;border-bottom:0.5px solid var(--color-border-tertiary);font-size:13px;align-items:flex-start}
-.summary-row:last-child{border-bottom:none}
-.summary-q{color:var(--color-text-secondary);flex:2}
-.summary-a{flex:1;font-weight:500;color:var(--color-text-primary)}
-.badge{display:inline-block;padding:2px 8px;border-radius:20px;font-size:12px;font-weight:500}
-.badge-yes{background:#EAF3DE;color:#3B6D11}
-.badge-no{background:#FAECE7;color:#993C1D}
-.badge-na{background:#F1EFE8;color:#5F5E5A}
-.badge-role{background:#EEEDFE;color:#3C3489;padding:3px 10px;border-radius:20px;font-size:12px;font-weight:500;display:inline-block;margin-bottom:1rem}
-.export-btn{width:100%;padding:10px;background:#5B50D6;color:#fff;border:none;border-radius:var(--border-radius-md);font-size:14px;font-weight:500;cursor:pointer;font-family:inherit;margin-top:1rem}
-.export-btn:hover{background:#4840b8}
-.required{color:#D85A30}
+.rg{display:flex;gap:.75rem;margin-top:.4rem;flex-wrap:wrap}
+.ro{display:flex;align-items:center;gap:6px;cursor:pointer;font-size:14px;padding:6px 16px;border:1px solid #ddd;border-radius:20px;transition:all .15s;user-select:none}
+.ro:hover{background:#f5f5f5}
+.ro.si{background:#e8f5e9;border-color:#4caf50;color:#1b5e20;font-weight:500}
+.ro.no{background:#ffebee;border-color:#f44336;color:#7f0000;font-weight:500}
+.ckg{display:flex;flex-direction:column;gap:8px;margin-top:.4rem}
+.cko{display:flex;align-items:center;gap:8px;font-size:14px;cursor:pointer;padding:4px 0}
+.cko input{width:auto;accent-color:#333}
+.cond{margin-top:.6rem;padding:.75rem 1rem;background:#f9f9f9;border-radius:6px;border-left:2px solid #bbb;display:none}
+.cond.on{display:block}
+.cond label{font-size:13px;color:#555;font-weight:400;margin-bottom:4px;display:block}
+.prog{height:4px;background:#eee;border-radius:2px;margin-bottom:2rem;overflow:hidden}
+.progf{height:100%;background:#333;border-radius:2px;transition:width .4s}
+.nav{display:flex;justify-content:space-between;align-items:center;margin-top:2rem;padding-top:1.5rem;border-top:1px solid #eee}
+.nav button{padding:8px 20px;border-radius:6px;font-size:14px;font-family:inherit;cursor:pointer;border:1px solid #ddd;background:#fff;color:#333}
+.nav button.p{background:#1a1a1a;color:#fff;border-color:#1a1a1a;font-weight:500}
+.nav button.p:hover{background:#333}
+.nav button:disabled{opacity:.35;pointer-events:none}
+.nav .si{font-size:13px;color:#888}
+.pg{display:none}.pg.on{display:block}
+.rcs{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1rem}
+.rc{border:1px solid #ddd;border-radius:10px;padding:1.25rem 1rem;cursor:pointer;transition:all .15s;text-align:center;background:#fff}
+.rc:hover{background:#f5f5f5}
+.rc.sel{border:2px solid #1a1a1a;background:#fafafa}
+.rc .ri{font-size:28px;margin-bottom:.5rem;color:#555}
+.rc .rl{font-size:14px;font-weight:500}
+.rc .rd{font-size:12px;color:#888;margin-top:4px}
+.sb{background:#f5f5f5;border-radius:8px;padding:1.25rem;margin-bottom:1rem}
+.sb h3{font-size:12px;font-weight:600;color:#666;text-transform:uppercase;letter-spacing:.05em;margin-bottom:.75rem}
+.sr{display:flex;gap:1rem;padding:6px 0;border-bottom:1px solid #eee;font-size:13px;align-items:flex-start}
+.sr:last-child{border-bottom:none}
+.sq{color:#666;flex:2}
+.sa{flex:1;font-weight:500}
+.by{display:inline-block;padding:2px 8px;border-radius:20px;font-size:12px;font-weight:500;background:#e8f5e9;color:#1b5e20}
+.bn{display:inline-block;padding:2px 8px;border-radius:20px;font-size:12px;font-weight:500;background:#ffebee;color:#7f0000}
+.bna{display:inline-block;padding:2px 8px;border-radius:20px;font-size:12px;font-weight:500;background:#f5f5f5;color:#888}
+.rpill{display:inline-block;background:#eee;padding:3px 12px;border-radius:20px;font-size:12px;font-weight:500;margin-bottom:1rem}
+.egrid{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;margin-top:.75rem}
+.ebtn{padding:10px 16px;border-radius:6px;font-size:14px;font-weight:500;cursor:pointer;font-family:inherit;display:flex;align-items:center;justify-content:center;gap:7px;transition:all .15s;border:none}
+.ecsv{background:#1a1a1a;color:#fff}
+.ecsv:hover{background:#333}
+.epdf{background:#fff;color:#1a1a1a;border:1px solid #ddd}
+.epdf:hover{background:#f5f5f5}
+.esend{background:#1a1a1a;color:#fff;width:100%;margin-top:1rem;padding:12px;font-size:15px}
+.esend:hover{background:#333}
+.esend:disabled{background:#999;cursor:not-allowed}
+.toast{position:fixed;bottom:1.5rem;left:50%;transform:translateX(-50%);background:#1a1a1a;color:#fff;padding:10px 20px;border-radius:6px;font-size:13px;font-weight:500;opacity:0;transition:opacity .3s;pointer-events:none;z-index:999}
+.toast.on{opacity:1}
+.req{color:#c00}
 </style>
 </head>
 <body>
-<h2 class="sr-only" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)">Questionario BPM Governance e gestione flussi</h2>
+
 <h1>Governance e gestione flussi</h1>
-<p class="subtitle">Questionario BPM — SD3 · v1.0 · 15/05/2026</p>
-<div class="progress-bar"><div class="progress-fill" id="progress" style="width:0%"></div></div>
+<p class="sub">Questionario BPM — SD3 · v1.0 · 15/05/2026 · Regione Emilia-Romagna</p>
+<div class="prog"><div class="progf" id="pf" style="width:0%"></div></div>
 
-<!-- PAGE 0: Selezione ruolo -->
-<div class="page active" id="page0">
-<div class="section">
-  <div class="section-title">Ruolo</div>
-  <div class="field">
-    <label>Sei il referente tecnico o organizzativo? <span class="required">*</span></label>
-    <div class="role-cards">
-      <div class="role-card" id="card-tecnico" onclick="selectRole('tecnico')">
-        <div class="role-icon"><i class="ti ti-settings-2" aria-hidden="true"></i></div>
-        <div class="role-label">Referente tecnico</div>
-        <div class="role-desc">Gestione sistemi, flussi e trasmissioni</div>
-      </div>
-      <div class="role-card" id="card-organizzativo" onclick="selectRole('organizzativo')">
-        <div class="role-icon"><i class="ti ti-users" aria-hidden="true"></i></div>
-        <div class="role-label">Referente organizzativo</div>
-        <div class="role-desc">Governance, qualità e reportistica</div>
-      </div>
+<!-- P0 ruolo -->
+<div class="pg on" id="p0">
+<div class="sec-title">Ruolo</div>
+<div class="field">
+  <label>Sei il referente tecnico o organizzativo? <span class="req">*</span></label>
+  <div class="rcs">
+    <div class="rc" id="ct" onclick="selRole('t')">
+      <div class="ri"><i class="ti ti-settings-2"></i></div>
+      <div class="rl">Referente tecnico</div>
+      <div class="rd">Gestione sistemi, flussi e trasmissioni</div>
+    </div>
+    <div class="rc" id="co" onclick="selRole('o')">
+      <div class="ri"><i class="ti ti-users"></i></div>
+      <div class="rl">Referente organizzativo</div>
+      <div class="rd">Governance, qualità e reportistica</div>
     </div>
   </div>
 </div>
-<div class="nav">
-  <span></span>
-  <span class="step-indicator"></span>
-  <button class="primary" id="btn-start" onclick="startQuestionnaire()" style="opacity:0.4;pointer-events:none">Inizia →</button>
-</div>
+<div class="nav"><span></span><span></span><button class="p" id="bstart" onclick="startQ()" disabled>Inizia →</button></div>
 </div>
 
-<!-- ===================== TECNICO ===================== -->
-
-<!-- T1: Identificazione -->
-<div class="page" id="pageT1">
-<div class="section">
-  <div class="section-title">1 · Identificazione</div>
-  <div class="field">
-    <label>Flusso di riferimento <span class="required">*</span></label>
-    <input type="text" id="t_flusso" placeholder="Es. Flusso HSP.11bis, SDO...">
-  </div>
-  <div class="field">
-    <label>Nome e Cognome dei Referenti <span class="required">*</span></label>
-    <textarea id="t_referenti" placeholder="Inserire nome e cognome di ciascun referente"></textarea>
-  </div>
-</div>
-<div class="nav">
-  <button onclick="goTo('page0',1,8)">← Indietro</button>
-  <span class="step-indicator">Sezione 1 di 6</span>
-  <button class="primary" onclick="goTo('pageT2',2,8)">Avanti →</button>
-</div>
+<!-- T1 -->
+<div class="pg" id="pT1">
+<div class="sec-title">1 · Identificazione</div>
+<div class="field"><label>Flusso di riferimento <span class="req">*</span></label><input type="text" id="t_fl" placeholder="Es. Flusso HSP.11bis, SDO..."></div>
+<div class="field"><label>Nome e Cognome dei Referenti <span class="req">*</span></label><textarea id="t_ref" placeholder="Inserire nome e cognome di ciascun referente"></textarea></div>
+<div class="nav"><button onclick="go('p0',0,8)">← Indietro</button><span class="si">Sezione 1 di 6</span><button class="p" onclick="go('pT2',2,8)">Avanti →</button></div>
 </div>
 
-<!-- T2: Acquisizione -->
-<div class="page" id="pageT2">
-<div class="section">
-  <div class="section-title">2 · Acquisizione del dato</div>
-  <div class="field">
-    <label>Il data entry viene effettuato su gestionali aziendali propri?</label>
-    <div class="radio-group">
-      <label class="radio-opt"><input type="radio" name="tq_gestionale" value="si"> Sì</label>
-      <label class="radio-opt"><input type="radio" name="tq_gestionale" value="no"> No</label>
-    </div>
-    <div class="conditional" id="tc_gestionale">
-      <label>Specificare il nome dell'applicativo regionale utilizzato</label>
-      <input type="text" id="tc_gestionale_txt" placeholder="Nome applicativo...">
-    </div>
-  </div>
-  <div class="field">
-    <label>Il flusso viene acquisito tramite il Portale di accoglienza Flussi regionale SISEPS?</label>
-    <div class="radio-group">
-      <label class="radio-opt"><input type="radio" name="tq_siseps" value="si"> Sì</label>
-      <label class="radio-opt"><input type="radio" name="tq_siseps" value="no"> No</label>
-    </div>
-    <div class="conditional" id="tc_siseps">
-      <label>Specificare il canale/modalità alternativa utilizzata</label>
-      <input type="text" id="tc_siseps_txt" placeholder="Es. integrazione applicativo regionale - DWH...">
-    </div>
-  </div>
-</div>
-<div class="nav">
-  <button onclick="goTo('pageT1',2,8)">← Indietro</button>
-  <span class="step-indicator">Sezione 2 di 6</span>
-  <button class="primary" onclick="goTo('pageT3',3,8)">Avanti →</button>
-</div>
+<!-- T2 -->
+<div class="pg" id="pT2">
+<div class="sec-title">2 · Acquisizione del dato</div>
+<div class="field"><label>Il data entry viene effettuato su gestionali aziendali propri?</label><div class="rg" id="rg_tg"></div><div class="cond" id="cd_tg"><label>Specificare il nome dell'applicativo regionale utilizzato</label><input type="text" id="tx_tg" placeholder="Nome applicativo..."></div></div>
+<div class="field"><label>Il flusso viene acquisito tramite il Portale di accoglienza Flussi regionale SISEPS?</label><div class="rg" id="rg_ts"></div><div class="cond" id="cd_ts"><label>Specificare il canale/modalità alternativa utilizzata</label><input type="text" id="tx_ts" placeholder="Es. integrazione applicativo regionale - DWH..."></div></div>
+<div class="nav"><button onclick="go('pT1',1,8)">← Indietro</button><span class="si">Sezione 2 di 6</span><button class="p" onclick="go('pT3',3,8)">Avanti →</button></div>
 </div>
 
-<!-- T3: Livelli di controllo -->
-<div class="page" id="pageT3">
-<div class="section">
-  <div class="section-title">3 · Livelli di controllo SISEPS</div>
-  <div class="field">
-    <label>Quali fasi sono attive per il flusso all'interno del Portale Flussi SISEPS?</label>
-    <div class="checkbox-group">
-      <label class="check-opt"><input type="checkbox" id="tck_sim"> Simulazione invio</label>
-      <label class="check-opt"><input type="checkbox" id="tck_cons"> Consolidamento dati</label>
-      <label class="check-opt"><input type="checkbox" id="tck_auth"> Autorizzazione caricamento dati</label>
-      <label class="check-opt"><input type="checkbox" id="tck_none"> Nessuna delle precedenti</label>
-    </div>
-  </div>
-  <div class="field">
-    <label>Sono previsti controlli logico-formali scartanti sul flusso in SISEPS?</label>
-    <div class="radio-group">
-      <label class="radio-opt"><input type="radio" name="tq_controlli" value="si"> Sì</label>
-      <label class="radio-opt"><input type="radio" name="tq_controlli" value="no"> No</label>
-    </div>
-    <div class="conditional" id="tc_controlli">
-      <label>Specificare su quale sistema avvengono i controlli o se non avvengono</label>
-      <input type="text" id="tc_controlli_txt" placeholder="Es. applicativo di data entry, altro sistema...">
-    </div>
+<!-- T3 -->
+<div class="pg" id="pT3">
+<div class="sec-title">3 · Livelli di controllo SISEPS</div>
+<div class="field">
+  <label>Quali fasi sono attive per il flusso all'interno del Portale Flussi SISEPS?</label>
+  <div class="ckg">
+    <label class="cko"><input type="checkbox" id="ck1"> Simulazione invio</label>
+    <label class="cko"><input type="checkbox" id="ck2"> Consolidamento dati</label>
+    <label class="cko"><input type="checkbox" id="ck3"> Autorizzazione caricamento dati</label>
+    <label class="cko"><input type="checkbox" id="ck4"> Nessuna delle precedenti</label>
   </div>
 </div>
-<div class="nav">
-  <button onclick="goTo('pageT2',3,8)">← Indietro</button>
-  <span class="step-indicator">Sezione 3 di 6</span>
-  <button class="primary" onclick="goTo('pageT4',4,8)">Avanti →</button>
-</div>
+<div class="field"><label>Sono previsti controlli logico-formali scartanti sul flusso in SISEPS?</label><div class="rg" id="rg_tc"></div><div class="cond" id="cd_tc"><label>Specificare su quale sistema avvengono i controlli o se non avvengono</label><input type="text" id="tx_tc" placeholder="Es. applicativo di data entry..."></div></div>
+<div class="nav"><button onclick="go('pT2',2,8)">← Indietro</button><span class="si">Sezione 3 di 6</span><button class="p" onclick="go('pT4',4,8)">Avanti →</button></div>
 </div>
 
-<!-- T4: Azioni correttive -->
-<div class="page" id="pageT4">
-<div class="section">
-  <div class="section-title">4 · Azioni correttive</div>
-  <div class="field">
-    <label>In caso di scarto del record, viene trasmesso un ritorno informativo all'Azienda?</label>
-    <div class="radio-group">
-      <label class="radio-opt"><input type="radio" name="tq_ritorno" value="si"> Sì</label>
-      <label class="radio-opt"><input type="radio" name="tq_ritorno" value="no"> No</label>
-    </div>
-    <div class="conditional" id="tc_ritorno">
-      <label>Specificare la modalità di gestione degli scarti adottata</label>
-      <textarea id="tc_ritorno_txt"></textarea>
-    </div>
-  </div>
-  <div class="field">
-    <label>La gestione del ritorno informativo è affidata al referente tecnico?</label>
-    <div class="radio-group">
-      <label class="radio-opt"><input type="radio" name="tq_ref_tec" value="si"> Sì</label>
-      <label class="radio-opt"><input type="radio" name="tq_ref_tec" value="no"> No</label>
-    </div>
-    <div class="conditional" id="tc_ref_tec">
-      <label>Specificare quale altro attore gestisce la trasmissione del ritorno informativo</label>
-      <input type="text" id="tc_ref_tec_txt">
-    </div>
-  </div>
-  <div class="field">
-    <label>Viene monitorata la correzione degli scarti del flusso regionale da parte delle Aziende?</label>
-    <div class="radio-group">
-      <label class="radio-opt"><input type="radio" name="tq_monit" value="si"> Sì</label>
-      <label class="radio-opt"><input type="radio" name="tq_monit" value="no"> No</label>
-    </div>
-    <div class="conditional" id="tc_monit">
-      <label>Specificare se e come si tiene traccia delle azioni correttive</label>
-      <textarea id="tc_monit_txt"></textarea>
-    </div>
-  </div>
-  <div class="field">
-    <label>Sono previsti solleciti alle Aziende in caso di mancata correzione degli scarti?</label>
-    <div class="radio-group">
-      <label class="radio-opt"><input type="radio" name="tq_solleciti" value="si"> Sì</label>
-      <label class="radio-opt"><input type="radio" name="tq_solleciti" value="no"> No</label>
-    </div>
-    <div class="conditional" id="tc_solleciti">
-      <label>Specificare il meccanismo di escalation o se non è presente</label>
-      <input type="text" id="tc_solleciti_txt">
-    </div>
-  </div>
-</div>
-<div class="nav">
-  <button onclick="goTo('pageT3',4,8)">← Indietro</button>
-  <span class="step-indicator">Sezione 4 di 6</span>
-  <button class="primary" onclick="goTo('pageT5',5,8)">Avanti →</button>
-</div>
+<!-- T4 -->
+<div class="pg" id="pT4">
+<div class="sec-title">4 · Azioni correttive</div>
+<div class="field"><label>In caso di scarto del record, viene trasmesso un ritorno informativo all'Azienda?</label><div class="rg" id="rg_tr"></div><div class="cond" id="cd_tr"><label>Specificare la modalità di gestione degli scarti adottata</label><textarea id="tx_tr"></textarea></div></div>
+<div class="field"><label>La gestione del ritorno informativo è affidata al referente tecnico?</label><div class="rg" id="rg_trt"></div><div class="cond" id="cd_trt"><label>Specificare quale altro attore gestisce la trasmissione del ritorno informativo</label><input type="text" id="tx_trt"></div></div>
+<div class="field"><label>Viene monitorata la correzione degli scarti del flusso regionale da parte delle Aziende?</label><div class="rg" id="rg_tm"></div><div class="cond" id="cd_tm"><label>Specificare se e come si tiene traccia delle azioni correttive</label><textarea id="tx_tm"></textarea></div></div>
+<div class="field"><label>Sono previsti solleciti alle Aziende in caso di mancata correzione degli scarti?</label><div class="rg" id="rg_tso"></div><div class="cond" id="cd_tso"><label>Specificare il meccanismo di escalation o se non è presente</label><input type="text" id="tx_tso"></div></div>
+<div class="nav"><button onclick="go('pT3',3,8)">← Indietro</button><span class="si">Sezione 4 di 6</span><button class="p" onclick="go('pT5',5,8)">Avanti →</button></div>
 </div>
 
-<!-- T5: Conservazione e trasmissione -->
-<div class="page" id="pageT5">
-<div class="section">
-  <div class="section-title">5 · Conservazione e trasmissione verso enti terzi</div>
-  <div class="field">
-    <label>Il flusso regionale viene archiviato nel DWH regionale di Livello 0?</label>
-    <div class="radio-group">
-      <label class="radio-opt"><input type="radio" name="tq_dwh0" value="si"> Sì</label>
-      <label class="radio-opt"><input type="radio" name="tq_dwh0" value="no"> No</label>
-    </div>
-    <div class="conditional" id="tc_dwh0">
-      <label>Specificare dove e con quale modalità viene conservato il dato</label>
-      <input type="text" id="tc_dwh0_txt">
-    </div>
-  </div>
-  <div class="field">
-    <label>Il flusso regionale viene trasmesso a Enti Terzi?</label>
-    <div class="radio-group">
-      <label class="radio-opt"><input type="radio" name="tq_enti" value="si"> Sì</label>
-      <label class="radio-opt"><input type="radio" name="tq_enti" value="no"> No</label>
-    </div>
-    <div class="conditional" id="tc_enti">
-      <label>Specificare se il processo si conclude con l'archiviazione del flusso regionale</label>
-      <input type="text" id="tc_enti_txt">
-    </div>
-  </div>
-  <div class="field">
-    <label>Il processo di trascodifica, controlli e generazione del flusso per l'Ente Terzo è gestito dal fornitore/referente tecnico?</label>
-    <div class="radio-group">
-      <label class="radio-opt"><input type="radio" name="tq_trascodifica" value="si"> Sì</label>
-      <label class="radio-opt"><input type="radio" name="tq_trascodifica" value="no"> No</label>
-    </div>
-    <div class="conditional" id="tc_trascodifica">
-      <label>Specificare chi gestisce questa fase</label>
-      <input type="text" id="tc_trascodifica_txt">
-    </div>
-  </div>
-  <div class="field">
-    <label>Il processo di trasmissione del flusso verso l'Ente Terzo è gestito dal referente tecnico?</label>
-    <div class="radio-group">
-      <label class="radio-opt"><input type="radio" name="tq_trasmissione" value="si"> Sì</label>
-      <label class="radio-opt"><input type="radio" name="tq_trasmissione" value="no"> No</label>
-    </div>
-    <div class="conditional" id="tc_trasmissione">
-      <label>Specificare chi gestisce questa fase</label>
-      <input type="text" id="tc_trasmissione_txt">
-    </div>
-  </div>
-  <div class="field">
-    <label>Vengono sistematicamente richieste aperture eccezionali delle finestre di invio verso Enti Terzi?</label>
-    <div class="radio-group">
-      <label class="radio-opt"><input type="radio" name="tq_aperture" value="si"> Sì</label>
-      <label class="radio-opt"><input type="radio" name="tq_aperture" value="no"> No</label>
-    </div>
-    <div class="conditional" id="tc_aperture">
-      <label>Specificare numero indicativo di richieste, motivazioni e interventi strutturali adottati</label>
-      <textarea id="tc_aperture_txt"></textarea>
-    </div>
-  </div>
-  <div class="field">
-    <label>Il processo di gestione del ritorno informativo dell'Ente Terzo è gestito dal referente tecnico?</label>
-    <div class="radio-group">
-      <label class="radio-opt"><input type="radio" name="tq_ritorno_et" value="si"> Sì</label>
-      <label class="radio-opt"><input type="radio" name="tq_ritorno_et" value="no"> No</label>
-    </div>
-    <div class="conditional" id="tc_ritorno_et">
-      <label>Specificare chi gestisce questa fase</label>
-      <input type="text" id="tc_ritorno_et_txt">
-    </div>
-  </div>
-  <div class="field">
-    <label>In caso di scarti imputabili alla Regione, viene corretta la procedura di trascodifica e rigenerato il flusso?</label>
-    <div class="radio-group">
-      <label class="radio-opt"><input type="radio" name="tq_scarto_reg" value="si"> Sì</label>
-      <label class="radio-opt"><input type="radio" name="tq_scarto_reg" value="no"> No</label>
-    </div>
-    <div class="conditional" id="tc_scarto_reg">
-      <label>Specificare la modalità di gestione adottata</label>
-      <textarea id="tc_scarto_reg_txt"></textarea>
-    </div>
-  </div>
-  <div class="field">
-    <label>La correzione della procedura di trascodifica è eseguita dal fornitore su input del referente tecnico?</label>
-    <div class="radio-group">
-      <label class="radio-opt"><input type="radio" name="tq_fornitore" value="si"> Sì</label>
-      <label class="radio-opt"><input type="radio" name="tq_fornitore" value="no"> No</label>
-    </div>
-    <div class="conditional" id="tc_fornitore">
-      <label>Specificare chi esegue la correzione e con quale modalità</label>
-      <input type="text" id="tc_fornitore_txt">
-    </div>
-  </div>
-  <div class="field">
-    <label>Il flusso inviato all'Ente Terzo viene archiviato nel DWH regionale di Livello 0?</label>
-    <div class="radio-group">
-      <label class="radio-opt"><input type="radio" name="tq_dwh_et" value="si"> Sì</label>
-      <label class="radio-opt"><input type="radio" name="tq_dwh_et" value="no"> No</label>
-    </div>
-    <div class="conditional" id="tc_dwh_et">
-      <label>Specificare dove viene conservato il flusso trasmesso ad enti terzi</label>
-      <input type="text" id="tc_dwh_et_txt">
-    </div>
-  </div>
-</div>
-<div class="nav">
-  <button onclick="goTo('pageT4',5,8)">← Indietro</button>
-  <span class="step-indicator">Sezione 5 di 6</span>
-  <button class="primary" onclick="goTo('pageT6',6,8)">Avanti →</button>
-</div>
+<!-- T5 -->
+<div class="pg" id="pT5">
+<div class="sec-title">5 · Conservazione e trasmissione verso enti terzi</div>
+<div class="field"><label>Il flusso regionale viene archiviato nel DWH regionale di Livello 0?</label><div class="rg" id="rg_td0"></div><div class="cond" id="cd_td0"><label>Specificare dove e con quale modalità viene conservato il dato</label><input type="text" id="tx_td0"></div></div>
+<div class="field"><label>Il flusso regionale viene trasmesso a Enti Terzi?</label><div class="rg" id="rg_tet"></div><div class="cond" id="cd_tet"><label>Specificare se il processo si conclude con l'archiviazione del flusso regionale</label><input type="text" id="tx_tet"></div></div>
+<div class="field"><label>Il processo di trascodifica, controlli e generazione del flusso per l'Ente Terzo è gestito dal fornitore/referente tecnico?</label><div class="rg" id="rg_ttr"></div><div class="cond" id="cd_ttr"><label>Specificare chi gestisce questa fase</label><input type="text" id="tx_ttr"></div></div>
+<div class="field"><label>Il processo di trasmissione del flusso verso l'Ente Terzo è gestito dal referente tecnico?</label><div class="rg" id="rg_ttx"></div><div class="cond" id="cd_ttx"><label>Specificare chi gestisce questa fase</label><input type="text" id="tx_ttx"></div></div>
+<div class="field"><label>Vengono sistematicamente richieste aperture eccezionali delle finestre di invio verso Enti Terzi?</label><div class="rg" id="rg_tap"></div><div class="cond" id="cd_tap"><label>Specificare numero indicativo di richieste, motivazioni e interventi strutturali adottati</label><textarea id="tx_tap"></textarea></div></div>
+<div class="field"><label>Il processo di gestione del ritorno informativo dell'Ente Terzo è gestito dal referente tecnico?</label><div class="rg" id="rg_tri"></div><div class="cond" id="cd_tri"><label>Specificare chi gestisce questa fase</label><input type="text" id="tx_tri"></div></div>
+<div class="field"><label>In caso di scarti imputabili alla Regione, viene corretta la procedura di trascodifica e rigenerato il flusso?</label><div class="rg" id="rg_tsr"></div><div class="cond" id="cd_tsr"><label>Specificare la modalità di gestione adottata</label><textarea id="tx_tsr"></textarea></div></div>
+<div class="field"><label>La correzione della procedura di trascodifica è eseguita dal fornitore su input del referente tecnico?</label><div class="rg" id="rg_tfo"></div><div class="cond" id="cd_tfo"><label>Specificare chi esegue la correzione e con quale modalità</label><input type="text" id="tx_tfo"></div></div>
+<div class="field"><label>Il flusso inviato all'Ente Terzo viene archiviato nel DWH regionale di Livello 0?</label><div class="rg" id="rg_tde"></div><div class="cond" id="cd_tde"><label>Specificare dove viene conservato il flusso trasmesso ad enti terzi</label><input type="text" id="tx_tde"></div></div>
+<div class="nav"><button onclick="go('pT4',4,8)">← Indietro</button><span class="si">Sezione 5 di 6</span><button class="p" onclick="go('pT6',6,8)">Avanti →</button></div>
 </div>
 
-<!-- T6: Reportistica -->
-<div class="page" id="pageT6">
-<div class="section">
-  <div class="section-title">6 · Reportistica</div>
-  <div class="field">
-    <label>Viene prodotta reportistica di qualità del dato su tutte e cinque le dimensioni?</label>
-    <p class="hint">Qualità formale, sostanziale, tempestività, completezza, coerenza</p>
-    <div class="radio-group">
-      <label class="radio-opt"><input type="radio" name="tq_rep_q" value="si"> Sì</label>
-      <label class="radio-opt"><input type="radio" name="tq_rep_q" value="no"> No</label>
-    </div>
-    <div class="conditional" id="tc_rep_q">
-      <label>Specificare se non è presente alcuna reportistica o quali dimensioni non sono coperte</label>
-      <textarea id="tc_rep_q_txt"></textarea>
-    </div>
-  </div>
-  <div class="field">
-    <label>Vengono effettuati incontri periodici con le Aziende su tematiche di qualità del dato, supportati da reportistica?</label>
-    <div class="radio-group">
-      <label class="radio-opt"><input type="radio" name="tq_incontri" value="si"> Sì</label>
-      <label class="radio-opt"><input type="radio" name="tq_incontri" value="no"> No</label>
-    </div>
-    <div class="conditional" id="tc_incontri">
-      <label>Specificare come avviene il raccordo o se non è presente</label>
-      <textarea id="tc_incontri_txt"></textarea>
-    </div>
-  </div>
-  <div class="field">
-    <label>Viene prodotta reportistica di business (es. domanda/offerta)?</label>
-    <div class="radio-group">
-      <label class="radio-opt"><input type="radio" name="tq_rep_b" value="si"> Sì</label>
-      <label class="radio-opt"><input type="radio" name="tq_rep_b" value="no"> No</label>
-    </div>
-    <div class="conditional" id="tc_rep_b">
-      <label>Specificare se non è presente alcuna reportistica di business</label>
-      <input type="text" id="tc_rep_b_txt">
-    </div>
-  </div>
-  <div class="field">
-    <label>La reportistica di qualità e di business è presente e standardizzata in ReportER?</label>
-    <div class="radio-group">
-      <label class="radio-opt"><input type="radio" name="tq_reporter" value="si"> Sì</label>
-      <label class="radio-opt"><input type="radio" name="tq_reporter" value="no"> No</label>
-    </div>
-    <div class="conditional" id="tc_reporter">
-      <label>Specificare lo strumento alternativo o se non è presente alcuno strumento</label>
-      <input type="text" id="tc_reporter_txt" placeholder="Es. Power BI, Excel, altro...">
-    </div>
-  </div>
-</div>
-<div class="nav">
-  <button onclick="goTo('pageT5',6,8)">← Indietro</button>
-  <span class="step-indicator">Sezione 6 di 6</span>
-  <button class="primary" onclick="showSummary('tecnico')">Vedi riepilogo →</button>
-</div>
+<!-- T6 -->
+<div class="pg" id="pT6">
+<div class="sec-title">6 · Reportistica</div>
+<div class="field"><label>Viene prodotta reportistica di qualità del dato su tutte e cinque le dimensioni?</label><p class="hint">Qualità formale, sostanziale, tempestività, completezza, coerenza</p><div class="rg" id="rg_trq"></div><div class="cond" id="cd_trq"><label>Specificare se non è presente alcuna reportistica o quali dimensioni non sono coperte</label><textarea id="tx_trq"></textarea></div></div>
+<div class="field"><label>Vengono effettuati incontri periodici con le Aziende su tematiche di qualità del dato, supportati da reportistica?</label><div class="rg" id="rg_tin"></div><div class="cond" id="cd_tin"><label>Specificare come avviene il raccordo o se non è presente</label><textarea id="tx_tin"></textarea></div></div>
+<div class="field"><label>Viene prodotta reportistica di business (es. domanda/offerta)?</label><div class="rg" id="rg_trb"></div><div class="cond" id="cd_trb"><label>Specificare se non è presente alcuna reportistica di business</label><input type="text" id="tx_trb"></div></div>
+<div class="field"><label>La reportistica di qualità e di business è presente e standardizzata in ReportER?</label><div class="rg" id="rg_tre"></div><div class="cond" id="cd_tre"><label>Specificare lo strumento alternativo o se non è presente alcuno strumento</label><input type="text" id="tx_tre" placeholder="Es. Power BI, Excel, altro..."></div></div>
+<div class="nav"><button onclick="go('pT5',5,8)">← Indietro</button><span class="si">Sezione 6 di 6</span><button class="p" onclick="showSum('t')">Vedi riepilogo ✓</button></div>
 </div>
 
-<!-- ===================== ORGANIZZATIVO ===================== -->
-
-<!-- O1: Identificazione -->
-<div class="page" id="pageO1">
-<div class="section">
-  <div class="section-title">1 · Identificazione</div>
-  <div class="field">
-    <label>Flusso di riferimento <span class="required">*</span></label>
-    <input type="text" id="o_flusso" placeholder="Es. Flusso HSP.11bis, SDO...">
-  </div>
-  <div class="field">
-    <label>Nome e Cognome dei Referenti <span class="required">*</span></label>
-    <textarea id="o_referenti" placeholder="Inserire nome e cognome di ciascun referente"></textarea>
-  </div>
-</div>
-<div class="nav">
-  <button onclick="goTo('page0',1,5)">← Indietro</button>
-  <span class="step-indicator">Sezione 1 di 4</span>
-  <button class="primary" onclick="goTo('pageO2',2,5)">Avanti →</button>
-</div>
+<!-- O1 -->
+<div class="pg" id="pO1">
+<div class="sec-title">1 · Identificazione</div>
+<div class="field"><label>Flusso di riferimento <span class="req">*</span></label><input type="text" id="o_fl" placeholder="Es. Flusso HSP.11bis, SDO..."></div>
+<div class="field"><label>Nome e Cognome dei Referenti <span class="req">*</span></label><textarea id="o_ref" placeholder="Inserire nome e cognome di ciascun referente"></textarea></div>
+<div class="nav"><button onclick="go('p0',0,5)">← Indietro</button><span class="si">Sezione 1 di 3</span><button class="p" onclick="go('pO2',2,5)">Avanti →</button></div>
 </div>
 
-<!-- O2: Azioni correttive -->
-<div class="page" id="pageO2">
-<div class="section">
-  <div class="section-title">2 · Azioni correttive</div>
-  <div class="field">
-    <label>Viene monitorata la correzione degli scarti da parte delle Aziende?</label>
-    <div class="radio-group">
-      <label class="radio-opt"><input type="radio" name="oq_monit" value="si"> Sì</label>
-      <label class="radio-opt"><input type="radio" name="oq_monit" value="no"> No</label>
-    </div>
-    <div class="conditional" id="oc_monit">
-      <label>Specificare se e come si tiene traccia delle azioni correttive attese</label>
-      <textarea id="oc_monit_txt"></textarea>
-    </div>
-  </div>
-  <div class="field">
-    <label>Sono previsti solleciti alle Aziende in caso di mancata correzione degli scarti?</label>
-    <div class="radio-group">
-      <label class="radio-opt"><input type="radio" name="oq_solleciti" value="si"> Sì</label>
-      <label class="radio-opt"><input type="radio" name="oq_solleciti" value="no"> No</label>
-    </div>
-    <div class="conditional" id="oc_solleciti">
-      <label>Specificare il meccanismo di escalation adottato e chi lo gestisce</label>
-      <input type="text" id="oc_solleciti_txt">
-    </div>
-  </div>
-  <div class="field">
-    <label>Qualora necessario è previsto un adeguamento delle specifiche tecniche o organizzative?</label>
-    <div class="radio-group">
-      <label class="radio-opt"><input type="radio" name="oq_adeguamento" value="si"> Sì</label>
-      <label class="radio-opt"><input type="radio" name="oq_adeguamento" value="no"> No</label>
-    </div>
-    <div class="conditional" id="oc_adeguamento">
-      <label>Specificare come vengono gestite le anomalie ricorrenti</label>
-      <textarea id="oc_adeguamento_txt"></textarea>
-    </div>
-  </div>
-</div>
-<div class="nav">
-  <button onclick="goTo('pageO1',2,5)">← Indietro</button>
-  <span class="step-indicator">Sezione 2 di 4</span>
-  <button class="primary" onclick="goTo('pageO3',3,5)">Avanti →</button>
-</div>
+<!-- O2 -->
+<div class="pg" id="pO2">
+<div class="sec-title">2 · Azioni correttive</div>
+<div class="field"><label>Viene monitorata la correzione degli scarti da parte delle Aziende?</label><div class="rg" id="rg_om"></div><div class="cond" id="cd_om"><label>Specificare se e come si tiene traccia delle azioni correttive attese</label><textarea id="tx_om"></textarea></div></div>
+<div class="field"><label>Sono previsti solleciti alle Aziende in caso di mancata correzione degli scarti?</label><div class="rg" id="rg_os"></div><div class="cond" id="cd_os"><label>Specificare il meccanismo di escalation adottato e chi lo gestisce</label><input type="text" id="tx_os"></div></div>
+<div class="field"><label>Qualora necessario è previsto un adeguamento delle specifiche tecniche o organizzative?</label><div class="rg" id="rg_oa"></div><div class="cond" id="cd_oa"><label>Specificare come vengono gestite le anomalie ricorrenti</label><textarea id="tx_oa"></textarea></div></div>
+<div class="nav"><button onclick="go('pO1',1,5)">← Indietro</button><span class="si">Sezione 2 di 3</span><button class="p" onclick="go('pO3',3,5)">Avanti →</button></div>
 </div>
 
-<!-- O3: Reportistica -->
-<div class="page" id="pageO3">
-<div class="section">
-  <div class="section-title">3 · Reportistica</div>
-  <div class="field">
-    <label>Viene prodotta reportistica di qualità del dato su tutte e cinque le dimensioni?</label>
-    <p class="hint">Qualità formale, sostanziale, tempestività, completezza, coerenza</p>
-    <div class="radio-group">
-      <label class="radio-opt"><input type="radio" name="oq_rep_q" value="si"> Sì</label>
-      <label class="radio-opt"><input type="radio" name="oq_rep_q" value="no"> No</label>
-    </div>
-    <div class="conditional" id="oc_rep_q">
-      <label>Specificare se non è presente alcuna reportistica o quali dimensioni non sono coperte</label>
-      <textarea id="oc_rep_q_txt"></textarea>
-    </div>
-  </div>
-  <div class="field">
-    <label>Vengono effettuati incontri periodici con le Aziende su tematiche di qualità del dato, supportati da reportistica?</label>
-    <div class="radio-group">
-      <label class="radio-opt"><input type="radio" name="oq_incontri" value="si"> Sì</label>
-      <label class="radio-opt"><input type="radio" name="oq_incontri" value="no"> No</label>
-    </div>
-    <div class="conditional" id="oc_incontri">
-      <label>Specificare come avviene il raccordo o se non è presente</label>
-      <textarea id="oc_incontri_txt"></textarea>
-    </div>
-  </div>
-  <div class="field">
-    <label>Viene prodotta reportistica di business?</label>
-    <div class="radio-group">
-      <label class="radio-opt"><input type="radio" name="oq_rep_b" value="si"> Sì</label>
-      <label class="radio-opt"><input type="radio" name="oq_rep_b" value="no"> No</label>
-    </div>
-    <div class="conditional" id="oc_rep_b">
-      <label>Specificare se non è presente alcuna reportistica di business</label>
-      <input type="text" id="oc_rep_b_txt">
-    </div>
-  </div>
-  <div class="field">
-    <label>La reportistica di qualità e di business è presente e standardizzata in ReportER?</label>
-    <div class="radio-group">
-      <label class="radio-opt"><input type="radio" name="oq_reporter" value="si"> Sì</label>
-      <label class="radio-opt"><input type="radio" name="oq_reporter" value="no"> No</label>
-    </div>
-    <div class="conditional" id="oc_reporter">
-      <label>Specificare lo strumento alternativo o se non è presente alcuno strumento</label>
-      <input type="text" id="oc_reporter_txt" placeholder="Es. Power BI, Excel, altro...">
-    </div>
-  </div>
-</div>
-<div class="nav">
-  <button onclick="goTo('pageO2',3,5)">← Indietro</button>
-  <span class="step-indicator">Sezione 3 di 4 — ultima sezione</span>
-  <button class="primary" onclick="showSummary('organizzativo')">Vedi riepilogo →</button>
-</div>
+<!-- O3 -->
+<div class="pg" id="pO3">
+<div class="sec-title">3 · Reportistica</div>
+<div class="field"><label>Viene prodotta reportistica di qualità del dato su tutte e cinque le dimensioni?</label><p class="hint">Qualità formale, sostanziale, tempestività, completezza, coerenza</p><div class="rg" id="rg_orq"></div><div class="cond" id="cd_orq"><label>Specificare se non è presente alcuna reportistica o quali dimensioni non sono coperte</label><textarea id="tx_orq"></textarea></div></div>
+<div class="field"><label>Vengono effettuati incontri periodici con le Aziende su tematiche di qualità del dato, supportati da reportistica?</label><div class="rg" id="rg_oin"></div><div class="cond" id="cd_oin"><label>Specificare come avviene il raccordo o se non è presente</label><textarea id="tx_oin"></textarea></div></div>
+<div class="field"><label>Viene prodotta reportistica di business?</label><div class="rg" id="rg_orb"></div><div class="cond" id="cd_orb"><label>Specificare se non è presente alcuna reportistica di business</label><input type="text" id="tx_orb"></div></div>
+<div class="field"><label>La reportistica di qualità e di business è presente e standardizzata in ReportER?</label><div class="rg" id="rg_ore"></div><div class="cond" id="cd_ore"><label>Specificare lo strumento alternativo o se non è presente alcuno strumento</label><input type="text" id="tx_ore" placeholder="Es. Power BI, Excel, altro..."></div></div>
+<div class="nav"><button onclick="go('pO2',2,5)">← Indietro</button><span class="si">Sezione 3 di 3</span><button class="p" onclick="showSum('o')">Vedi riepilogo ✓</button></div>
 </div>
 
 <!-- SUMMARY -->
-<div class="page" id="pageSummary">
-<div class="section">
-  <div class="section-title">Riepilogo risposte</div>
-  <div id="summary-role-badge"></div>
-  <div id="summary-content"></div>
+<div class="pg" id="pSum">
+<div id="sum-pill" class="rpill"></div>
+<div id="sum-body"></div>
+<button class="ebtn esend" id="bsend" onclick="sendData()"><i class="ti ti-send"></i> Invia risposte</button>
+<div class="egrid">
+  <button class="ebtn ecsv" onclick="doCSV()"><i class="ti ti-table-export"></i> Esporta CSV</button>
+  <button class="ebtn epdf" onclick="doPDF()"><i class="ti ti-file-type-pdf"></i> Esporta PDF</button>
 </div>
-<button class="export-btn" onclick="exportCSV()"><i class="ti ti-download" aria-hidden="true"></i> Esporta risposte (CSV)</button>
-<div class="nav">
-  <button id="btn-back-summary" onclick="">← Modifica</button>
-  <span class="step-indicator"></span>
-  <span></span>
+<div class="nav"><button id="bback" onclick="">← Modifica</button><span></span><span></span></div>
 </div>
-</div>
+
+<div class="toast" id="toast"></div>
 
 <script>
-let selectedRole=null;
-let currentPageId='page0';
+var role=null, cur='p0', lastRole=null;
+var SHEET='https://script.google.com/macros/s/AKfycbwYiYE0LU30GZRBMpgyiwNvCmycXV6WNR5ehL5h8a_IQG5cuiUl644x_Azo65hvl6mk/exec';
 
-function selectRole(r){
-  selectedRole=r;
-  document.getElementById('card-tecnico').classList.toggle('selected',r==='tecnico');
-  document.getElementById('card-organizzativo').classList.toggle('selected',r==='organizzativo');
-  const btn=document.getElementById('btn-start');
-  btn.style.opacity='1';btn.style.pointerEvents='auto';
-}
+// Build radio groups
+var rgs={
+  rg_tg:'cd_tg', rg_ts:'cd_ts', rg_tc:'cd_tc', rg_tr:'cd_tr', rg_trt:'cd_trt',
+  rg_tm:'cd_tm', rg_tso:'cd_tso', rg_td0:'cd_td0', rg_tet:'cd_tet', rg_ttr:'cd_ttr',
+  rg_ttx:'cd_ttx', rg_tap:'cd_tap', rg_tri:'cd_tri', rg_tsr:'cd_tsr', rg_tfo:'cd_tfo',
+  rg_tde:'cd_tde', rg_trq:'cd_trq', rg_tin:'cd_tin', rg_trb:'cd_trb', rg_tre:'cd_tre',
+  rg_om:'cd_om', rg_os:'cd_os', rg_oa:'cd_oa', rg_orq:'cd_orq', rg_oin:'cd_oin',
+  rg_orb:'cd_orb', rg_ore:'cd_ore'
+};
 
-function startQuestionnaire(){
-  if(!selectedRole) return;
-  const next=selectedRole==='tecnico'?'pageT1':'pageO1';
-  goTo(next,1,selectedRole==='tecnico'?8:5);
-}
-
-function goTo(pageId,step,total){
-  document.getElementById(currentPageId).classList.remove('active');
-  currentPageId=pageId;
-  document.getElementById(pageId).classList.add('active');
-  const pct=total>1?Math.round((step-1)/(total-1)*100):0;
-  document.getElementById('progress').style.width=pct+'%';
-  window.scrollTo(0,0);
-}
-
-function setupConditional(radioName,condId){
-  document.querySelectorAll('input[name="'+radioName+'"]').forEach(r=>{
-    r.addEventListener('change',function(){
-      document.getElementById(condId).classList.toggle('visible',this.value==='no');
-    });
+Object.keys(rgs).forEach(function(id){
+  var el=document.getElementById(id);
+  if(!el)return;
+  ['Sì','No'].forEach(function(lbl){
+    var v=lbl==='Sì'?'si':'no';
+    var d=document.createElement('div');
+    d.className='ro'; d.dataset.v=v; d.textContent=lbl;
+    d.onclick=function(){setR(id,v);};
+    el.appendChild(d);
   });
+});
+
+function setR(rgId,v){
+  var el=document.getElementById(rgId);
+  el.querySelectorAll('.ro').forEach(function(b){b.className='ro';});
+  el.querySelector('[data-v="'+v+'"]').className='ro '+(v==='si'?'si':'no');
+  var cd=document.getElementById(rgs[rgId]);
+  if(cd) cd.className='cond'+(v==='no'?' on':'');
 }
 
-const conds=[
-  ['tq_gestionale','tc_gestionale'],['tq_siseps','tc_siseps'],
-  ['tq_controlli','tc_controlli'],['tq_ritorno','tc_ritorno'],
-  ['tq_ref_tec','tc_ref_tec'],['tq_monit','tc_monit'],
-  ['tq_solleciti','tc_solleciti'],['tq_dwh0','tc_dwh0'],
-  ['tq_enti','tc_enti'],['tq_trascodifica','tc_trascodifica'],
-  ['tq_trasmissione','tc_trasmissione'],['tq_aperture','tc_aperture'],
-  ['tq_ritorno_et','tc_ritorno_et'],['tq_scarto_reg','tc_scarto_reg'],
-  ['tq_fornitore','tc_fornitore'],['tq_dwh_et','tc_dwh_et'],
-  ['tq_rep_q','tc_rep_q'],['tq_incontri','tc_incontri'],
-  ['tq_rep_b','tc_rep_b'],['tq_reporter','tc_reporter'],
-  ['oq_monit','oc_monit'],['oq_solleciti','oc_solleciti'],
-  ['oq_adeguamento','oc_adeguamento'],['oq_rep_q','oc_rep_q'],
-  ['oq_incontri','oc_incontri'],['oq_rep_b','oc_rep_b'],['oq_reporter','oc_reporter']
-];
-conds.forEach(([r,c])=>setupConditional(r,c));
+function getR(rgId){
+  var el=document.getElementById(rgId);
+  if(!el)return null;
+  var c=el.querySelector('.si,.no');
+  return c?c.dataset.v:null;
+}
 
-['tck_sim','tck_cons','tck_auth'].forEach(id=>{
-  document.getElementById(id).addEventListener('change',function(){if(this.checked)document.getElementById('tck_none').checked=false;});
-});
-document.getElementById('tck_none').addEventListener('change',function(){
-  if(this.checked)['tck_sim','tck_cons','tck_auth'].forEach(id=>{document.getElementById(id).checked=false;});
-});
+function v(id){var e=document.getElementById(id);return e?e.value||'':'';}
 
-function getRadio(name){const el=document.querySelector('input[name="'+name+'"]:checked');return el?el.value:null;}
-function val(id){return(document.getElementById(id)||{}).value||'';}
-function getTckBoxes(){
-  const r=[];
-  if(document.getElementById('tck_sim').checked)r.push('Simulazione invio');
-  if(document.getElementById('tck_cons').checked)r.push('Consolidamento dati');
-  if(document.getElementById('tck_auth').checked)r.push('Autorizzazione caricamento dati');
-  if(document.getElementById('tck_none').checked)r.push('Nessuna delle precedenti');
+function getCk(){
+  var r=[];
+  if(document.getElementById('ck1').checked)r.push('Simulazione invio');
+  if(document.getElementById('ck2').checked)r.push('Consolidamento dati');
+  if(document.getElementById('ck3').checked)r.push('Autorizzazione caricamento dati');
+  if(document.getElementById('ck4').checked)r.push('Nessuna delle precedenti');
   return r.length?r.join(', '):'—';
 }
 
-function renderAnswer(v,detail){
-  if(!v)return '<span class="badge badge-na">—</span>';
-  const b=v==='si'?'<span class="badge badge-yes">Sì</span>':'<span class="badge badge-no">No</span>';
-  return b+(detail&&v==='no'?'<br><span style="font-size:12px;color:var(--color-text-secondary);margin-top:4px;display:block">'+detail+'</span>':'');
+['ck1','ck2','ck3'].forEach(function(id){
+  document.getElementById(id).onchange=function(){if(this.checked)document.getElementById('ck4').checked=false;};
+});
+document.getElementById('ck4').onchange=function(){
+  if(this.checked){['ck1','ck2','ck3'].forEach(function(id){document.getElementById(id).checked=false;});}
+};
+
+function selRole(r){
+  role=r;
+  document.getElementById('ct').className='rc'+(r==='t'?' sel':'');
+  document.getElementById('co').className='rc'+(r==='o'?' sel':'');
+  document.getElementById('bstart').disabled=false;
 }
 
-const tecnicoQ=[
-  {sec:'Identificazione',q:'Flusso di riferimento',fn:()=>val('t_flusso')||'—'},
-  {sec:'Identificazione',q:'Referenti',fn:()=>val('t_referenti')||'—'},
-  {sec:'Acquisizione del dato',q:'Data entry su gestionali aziendali propri?',fn:()=>renderAnswer(getRadio('tq_gestionale'),val('tc_gestionale_txt'))},
-  {sec:'Acquisizione del dato',q:'Acquisizione tramite Portale Flussi SISEPS?',fn:()=>renderAnswer(getRadio('tq_siseps'),val('tc_siseps_txt'))},
-  {sec:'Controllo SISEPS',q:'Fasi attive in SISEPS',fn:()=>getTckBoxes()},
-  {sec:'Controllo SISEPS',q:'Controlli logico-formali scartanti?',fn:()=>renderAnswer(getRadio('tq_controlli'),val('tc_controlli_txt'))},
-  {sec:'Azioni correttive',q:'Ritorno informativo all\'Azienda in caso di scarto?',fn:()=>renderAnswer(getRadio('tq_ritorno'),val('tc_ritorno_txt'))},
-  {sec:'Azioni correttive',q:'Gestione ritorno affidata al referente tecnico?',fn:()=>renderAnswer(getRadio('tq_ref_tec'),val('tc_ref_tec_txt'))},
-  {sec:'Azioni correttive',q:'Monitoraggio correzione scarti?',fn:()=>renderAnswer(getRadio('tq_monit'),val('tc_monit_txt'))},
-  {sec:'Azioni correttive',q:'Solleciti in caso di mancata correzione?',fn:()=>renderAnswer(getRadio('tq_solleciti'),val('tc_solleciti_txt'))},
-  {sec:'Conservazione e trasmissione',q:'Archiviazione in DWH regionale Livello 0?',fn:()=>renderAnswer(getRadio('tq_dwh0'),val('tc_dwh0_txt'))},
-  {sec:'Conservazione e trasmissione',q:'Trasmissione a Enti Terzi?',fn:()=>renderAnswer(getRadio('tq_enti'),val('tc_enti_txt'))},
-  {sec:'Conservazione e trasmissione',q:'Trascodifica gestita da fornitore/ref. tecnico?',fn:()=>renderAnswer(getRadio('tq_trascodifica'),val('tc_trascodifica_txt'))},
-  {sec:'Conservazione e trasmissione',q:'Trasmissione verso Ente Terzo da ref. tecnico?',fn:()=>renderAnswer(getRadio('tq_trasmissione'),val('tc_trasmissione_txt'))},
-  {sec:'Conservazione e trasmissione',q:'Aperture eccezionali sistematiche?',fn:()=>renderAnswer(getRadio('tq_aperture'),val('tc_aperture_txt'))},
-  {sec:'Conservazione e trasmissione',q:'Gestione ritorno informativo Ente Terzo?',fn:()=>renderAnswer(getRadio('tq_ritorno_et'),val('tc_ritorno_et_txt'))},
-  {sec:'Conservazione e trasmissione',q:'Correzione trascodifica e rigenerazione flusso?',fn:()=>renderAnswer(getRadio('tq_scarto_reg'),val('tc_scarto_reg_txt'))},
-  {sec:'Conservazione e trasmissione',q:'Correzione da fornitore su input ref. tecnico?',fn:()=>renderAnswer(getRadio('tq_fornitore'),val('tc_fornitore_txt'))},
-  {sec:'Conservazione e trasmissione',q:'Flusso Ente Terzo archiviato in DWH Livello 0?',fn:()=>renderAnswer(getRadio('tq_dwh_et'),val('tc_dwh_et_txt'))},
-  {sec:'Reportistica',q:'Reportistica qualità su tutte le 5 dimensioni?',fn:()=>renderAnswer(getRadio('tq_rep_q'),val('tc_rep_q_txt'))},
-  {sec:'Reportistica',q:'Incontri periodici con Aziende su qualità del dato?',fn:()=>renderAnswer(getRadio('tq_incontri'),val('tc_incontri_txt'))},
-  {sec:'Reportistica',q:'Reportistica di business?',fn:()=>renderAnswer(getRadio('tq_rep_b'),val('tc_rep_b_txt'))},
-  {sec:'Reportistica',q:'Reportistica standardizzata in ReportER?',fn:()=>renderAnswer(getRadio('tq_reporter'),val('tc_reporter_txt'))},
+function startQ(){
+  if(!role)return;
+  go(role==='t'?'pT1':'pO1',1,role==='t'?8:5);
+}
+
+function go(pid,step,tot){
+  document.getElementById(cur).className='pg';
+  cur=pid;
+  document.getElementById(pid).className='pg on';
+  var pct=tot>1?Math.round((step-1)/(tot-1)*100):0;
+  document.getElementById('pf').style.width=pct+'%';
+  window.scrollTo(0,0);
+}
+
+function ra(v2,det){
+  if(!v2)return '<span class="bna">—</span>';
+  var b=v2==='si'?'<span class="by">✔ Sì</span>':'<span class="bn">✘ No</span>';
+  return b+(det&&v2==='no'&&det.trim()?'<br><span style="font-size:11px;color:#666;margin-top:3px;display:block">'+det+'</span>':'');
+}
+
+var tQs=[
+  {s:'Identificazione',q:'Flusso di riferimento',f:function(){return v('t_fl')||'—';}},
+  {s:'Identificazione',q:'Referenti',f:function(){return v('t_ref')||'—';}},
+  {s:'Acquisizione del dato',q:'Data entry su gestionali aziendali propri?',f:function(){return ra(getR('rg_tg'),v('tx_tg'));}},
+  {s:'Acquisizione del dato',q:'Acquisizione tramite Portale Flussi SISEPS?',f:function(){return ra(getR('rg_ts'),v('tx_ts'));}},
+  {s:'Controllo SISEPS',q:'Fasi attive in SISEPS',f:function(){return getCk();}},
+  {s:'Controllo SISEPS',q:'Controlli logico-formali scartanti?',f:function(){return ra(getR('rg_tc'),v('tx_tc'));}},
+  {s:'Azioni correttive',q:"Ritorno informativo all'Azienda in caso di scarto?",f:function(){return ra(getR('rg_tr'),v('tx_tr'));}},
+  {s:'Azioni correttive',q:'Gestione ritorno affidata al referente tecnico?',f:function(){return ra(getR('rg_trt'),v('tx_trt'));}},
+  {s:'Azioni correttive',q:'Monitoraggio correzione scarti?',f:function(){return ra(getR('rg_tm'),v('tx_tm'));}},
+  {s:'Azioni correttive',q:'Solleciti in caso di mancata correzione?',f:function(){return ra(getR('rg_tso'),v('tx_tso'));}},
+  {s:'Conservazione e trasmissione',q:'Archiviazione in DWH regionale Livello 0?',f:function(){return ra(getR('rg_td0'),v('tx_td0'));}},
+  {s:'Conservazione e trasmissione',q:'Trasmissione a Enti Terzi?',f:function(){return ra(getR('rg_tet'),v('tx_tet'));}},
+  {s:'Conservazione e trasmissione',q:'Trascodifica gestita da fornitore/ref. tecnico?',f:function(){return ra(getR('rg_ttr'),v('tx_ttr'));}},
+  {s:'Conservazione e trasmissione',q:'Trasmissione verso Ente Terzo da ref. tecnico?',f:function(){return ra(getR('rg_ttx'),v('tx_ttx'));}},
+  {s:'Conservazione e trasmissione',q:'Aperture eccezionali sistematiche?',f:function(){return ra(getR('rg_tap'),v('tx_tap'));}},
+  {s:'Conservazione e trasmissione',q:'Gestione ritorno informativo Ente Terzo?',f:function(){return ra(getR('rg_tri'),v('tx_tri'));}},
+  {s:'Conservazione e trasmissione',q:'Correzione trascodifica e rigenerazione flusso?',f:function(){return ra(getR('rg_tsr'),v('tx_tsr'));}},
+  {s:'Conservazione e trasmissione',q:'Correzione da fornitore su input ref. tecnico?',f:function(){return ra(getR('rg_tfo'),v('tx_tfo'));}},
+  {s:'Conservazione e trasmissione',q:'Flusso Ente Terzo archiviato in DWH Livello 0?',f:function(){return ra(getR('rg_tde'),v('tx_tde'));}},
+  {s:'Reportistica',q:'Reportistica qualità su tutte le 5 dimensioni?',f:function(){return ra(getR('rg_trq'),v('tx_trq'));}},
+  {s:'Reportistica',q:'Incontri periodici con Aziende su qualità del dato?',f:function(){return ra(getR('rg_tin'),v('tx_tin'));}},
+  {s:'Reportistica',q:'Reportistica di business?',f:function(){return ra(getR('rg_trb'),v('tx_trb'));}},
+  {s:'Reportistica',q:'Reportistica standardizzata in ReportER?',f:function(){return ra(getR('rg_tre'),v('tx_tre'));}}
 ];
 
-const organizzativoQ=[
-  {sec:'Identificazione',q:'Flusso di riferimento',fn:()=>val('o_flusso')||'—'},
-  {sec:'Identificazione',q:'Referenti',fn:()=>val('o_referenti')||'—'},
-  {sec:'Azioni correttive',q:'Monitoraggio correzione scarti da parte delle Aziende?',fn:()=>renderAnswer(getRadio('oq_monit'),val('oc_monit_txt'))},
-  {sec:'Azioni correttive',q:'Solleciti in caso di mancata correzione?',fn:()=>renderAnswer(getRadio('oq_solleciti'),val('oc_solleciti_txt'))},
-  {sec:'Azioni correttive',q:'Adeguamento delle specifiche tecniche/organizzative?',fn:()=>renderAnswer(getRadio('oq_adeguamento'),val('oc_adeguamento_txt'))},
-  {sec:'Reportistica',q:'Reportistica qualità su tutte le 5 dimensioni?',fn:()=>renderAnswer(getRadio('oq_rep_q'),val('oc_rep_q_txt'))},
-  {sec:'Reportistica',q:'Incontri periodici con Aziende su qualità del dato?',fn:()=>renderAnswer(getRadio('oq_incontri'),val('oc_incontri_txt'))},
-  {sec:'Reportistica',q:'Reportistica di business?',fn:()=>renderAnswer(getRadio('oq_rep_b'),val('oc_rep_b_txt'))},
-  {sec:'Reportistica',q:'Reportistica standardizzata in ReportER?',fn:()=>renderAnswer(getRadio('oq_reporter'),val('oc_reporter_txt'))},
+var oQs=[
+  {s:'Identificazione',q:'Flusso di riferimento',f:function(){return v('o_fl')||'—';}},
+  {s:'Identificazione',q:'Referenti',f:function(){return v('o_ref')||'—';}},
+  {s:'Azioni correttive',q:'Monitoraggio correzione scarti da parte delle Aziende?',f:function(){return ra(getR('rg_om'),v('tx_om'));}},
+  {s:'Azioni correttive',q:'Solleciti in caso di mancata correzione?',f:function(){return ra(getR('rg_os'),v('tx_os'));}},
+  {s:'Azioni correttive',q:'Adeguamento delle specifiche tecniche/organizzative?',f:function(){return ra(getR('rg_oa'),v('tx_oa'));}},
+  {s:'Reportistica',q:'Reportistica qualità su tutte le 5 dimensioni?',f:function(){return ra(getR('rg_orq'),v('tx_orq'));}},
+  {s:'Reportistica',q:'Incontri periodici con Aziende su qualità del dato?',f:function(){return ra(getR('rg_oin'),v('tx_oin'));}},
+  {s:'Reportistica',q:'Reportistica di business?',f:function(){return ra(getR('rg_orb'),v('tx_orb'));}},
+  {s:'Reportistica',q:'Reportistica standardizzata in ReportER?',f:function(){return ra(getR('rg_ore'),v('tx_ore'));}}
 ];
 
-let lastSummaryRole=null;
-
-function showSummary(role){
-  lastSummaryRole=role;
-  const qs=role==='tecnico'?tecnicoQ:organizzativoQ;
-  const sections={};
-  qs.forEach(q=>{if(!sections[q.sec])sections[q.sec]=[];sections[q.sec].push(q);});
-  let html='';
-  Object.entries(sections).forEach(([sec,qs])=>{
-    html+='<div class="summary-block"><h3>'+sec+'</h3>';
-    qs.forEach(q=>{html+='<div class="summary-row"><span class="summary-q">'+q.q+'</span><span class="summary-a">'+q.fn()+'</span></div>';});
+function showSum(r){
+  lastRole=r;
+  var qs=r==='t'?tQs:oQs;
+  var lbl=r==='t'?'Referente tecnico':'Referente organizzativo';
+  var secs={};
+  qs.forEach(function(q){if(!secs[q.s])secs[q.s]=[];secs[q.s].push(q);});
+  var html='';
+  Object.keys(secs).forEach(function(s){
+    html+='<div class="sb"><h3>'+s+'</h3>';
+    secs[s].forEach(function(q){html+='<div class="sr"><span class="sq">'+q.q+'</span><span class="sa">'+q.f()+'</span></div>';});
     html+='</div>';
   });
-  document.getElementById('summary-content').innerHTML=html;
-  document.getElementById('summary-role-badge').innerHTML='<span class="badge-role"><i class="ti '+(role==='tecnico'?'ti-settings-2':'ti-users')+'" aria-hidden="true" style="margin-right:4px"></i>'+( role==='tecnico'?'Referente tecnico':'Referente organizzativo')+'</span>';
-  const backPage=role==='tecnico'?'pageT6':'pageO3';
-  const backStep=role==='tecnico'?8:5;
-  document.getElementById('btn-back-summary').onclick=()=>goTo(backPage,backStep-1,backStep);
-  goTo('pageSummary',role==='tecnico'?8:5,role==='tecnico'?8:5);
+  document.getElementById('sum-body').innerHTML=html;
+  document.getElementById('sum-pill').textContent=lbl;
+  document.getElementById('bsend').disabled=false;
+  document.getElementById('bsend').textContent='';
+  document.getElementById('bsend').innerHTML='<i class="ti ti-send"></i> Invia risposte';
+  document.getElementById('bback').onclick=function(){
+    go(r==='t'?'pT6':'pO3',r==='t'?7:4,r==='t'?8:5);
+  };
+  go('pSum',r==='t'?8:5,r==='t'?8:5);
 }
 
-function exportCSV(){
-  const role=lastSummaryRole;
-  const qs=role==='tecnico'?tecnicoQ:organizzativoQ;
-  const rows=[['Ruolo','Sezione','Domanda','Risposta']];
-  const roleLabel=role==='tecnico'?'Referente tecnico':'Referente organizzativo';
-  qs.forEach(q=>{
-    const raw=q.fn().replace(/<[^>]+>/g,'').replace(/\s+/g,' ').trim();
-    rows.push([roleLabel,q.sec,q.q,raw]);
+function toast(msg){
+  var t=document.getElementById('toast');
+  t.textContent=msg;t.className='toast on';
+  setTimeout(function(){t.className='toast';},3500);
+}
+
+function sendData(){
+  var r=lastRole;
+  var qs=r==='t'?tQs:oQs;
+  var lbl=r==='t'?'Referente tecnico':'Referente organizzativo';
+  var data={Timestamp:new Date().toLocaleString('it-IT'),Ruolo:lbl};
+  qs.forEach(function(q){
+    data[q.q]=q.f().replace(/<[^>]+>/g,'').replace(/\s+/g,' ').trim();
   });
-  const csv=rows.map(r=>r.map(c=>'"'+String(c).replace(/"/g,'""')+'"').join(',')).join('\n');
-  const blob=new Blob(['\uFEFF'+csv],{type:'text/csv;charset=utf-8;'});
-  const url=URL.createObjectURL(blob);
-  const a=document.createElement('a');
-  const flusso=(role==='tecnico'?val('t_flusso'):val('o_flusso')).replace(/\s+/g,'_')||'flusso';
-  a.href=url;a.download='BPM_'+role+'_'+flusso+'.csv';
-  a.click();URL.revokeObjectURL(url);
+  var btn=document.getElementById('bsend');
+  btn.disabled=true;btn.innerHTML='<i class="ti ti-loader"></i> Invio in corso...';
+  fetch(SHEET,{method:'POST',body:JSON.stringify(data),mode:'no-cors'})
+    .then(function(){
+      btn.innerHTML='<i class="ti ti-check"></i> Inviato con successo';
+      btn.style.background='#2e7d32';
+      toast('Risposte inviate con successo!');
+    })
+    .catch(function(){
+      btn.disabled=false;
+      btn.innerHTML='<i class="ti ti-send"></i> Invia risposte';
+      toast('Errore durante l\'invio. Riprova.');
+    });
+}
+
+function doCSV(){
+  var r=lastRole,qs=r==='t'?tQs:oQs;
+  var lbl=r==='t'?'Referente tecnico':'Referente organizzativo';
+  var rows=[['Ruolo','Sezione','Domanda','Risposta']];
+  qs.forEach(function(q){
+    rows.push([lbl,q.s,q.q,q.f().replace(/<[^>]+>/g,'').replace(/\s+/g,' ').trim()]);
+  });
+  var csv=rows.map(function(r2){return r2.map(function(c){return '"'+String(c).replace(/"/g,'""')+'"';}).join(',');}).join('\n');
+  var blob=new Blob(['\uFEFF'+csv],{type:'text/csv;charset=utf-8;'});
+  var a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);
+  a.download='BPM_'+(r==='t'?v('t_fl'):v('o_fl')).replace(/\s+/g,'_')+'.csv';
+  a.click();
+}
+
+function doPDF(){
+  var r=lastRole,qs=r==='t'?tQs:oQs;
+  var lbl=r==='t'?'Referente tecnico':'Referente organizzativo';
+  var flusso=(r==='t'?v('t_fl'):v('o_fl'))||'—';
+  var secs={};
+  qs.forEach(function(q){if(!secs[q.s])secs[q.s]=[];secs[q.s].push(q);});
+  var body='';
+  Object.keys(secs).forEach(function(s){
+    body+='<div class="sec"><div class="st">'+s+'</div>';
+    secs[s].forEach(function(q){
+      var raw=q.f().replace(/<br><span[^>]+>([\s\S]*?)<\/span>/,'\n↳ $1').replace(/<[^>]+>/g,'').trim();
+      body+='<div class="row"><div class="qq">'+q.q+'</div><div class="aa">'+raw+'</div></div>';
+    });
+    body+='</div>';
+  });
+  var html='<!DOCTYPE html><html lang="it"><head><meta charset="UTF-8"><title>BPM '+lbl+' '+flusso+'</title><style>*{box-sizing:border-box;margin:0;padding:0}body{font-family:Arial,sans-serif;font-size:10pt;color:#1a1a1a}.hd{background:#1a1a1a;padding:12px 2cm}.hd h2{color:#fff;font-size:12pt;font-weight:600}.hs{background:#f5f5f5;padding:10px 2cm 12px;border-bottom:3px solid #1a1a1a;margin-bottom:16px}.hs h1{font-size:13pt;font-weight:700;color:#1a1a1a;margin-bottom:2px}.hs p{font-size:8pt;color:#666}.pill{display:inline-block;background:#1a1a1a;color:#fff;padding:3px 14px;border-radius:20px;font-size:8pt;font-weight:700;margin-bottom:14px;margin-left:2cm}.content{padding:0 2cm 1.5cm}.sec{margin-bottom:12px;break-inside:avoid}.st{font-size:7.5pt;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:#555;border-bottom:1px solid #ddd;padding-bottom:4px;margin-bottom:8px}.row{display:flex;gap:12px;padding:5px 0;border-bottom:.5px solid #f0f0f0;font-size:9.5pt}.row:last-child{border-bottom:none}.qq{flex:2;color:#666;line-height:1.4}.aa{flex:1;font-weight:700;white-space:pre-line}.ft{margin-top:20px;padding-top:8px;border-top:1px solid #ddd;font-size:7pt;color:#aaa;text-align:center}@media print{@page{margin:0}body{-webkit-print-color-adjust:exact;print-color-adjust:exact}}</style></head><body><div class="hd"><h2>Intellera Consulting · part of Accenture</h2></div><div class="hs"><h1>Governance e gestione flussi</h1><p>Questionario BPM — SD3 · v1.0 · 15/05/2026 · Regione Emilia-Romagna</p></div><div class="pill">'+lbl+'</div><div class="content">'+body+'<div class="ft">Intellera Consulting part of Accenture · Regione Emilia-Romagna · BPM SD3 v1.0 · '+new Date().toLocaleDateString('it-IT')+'</div></div></body></html>';
+  var w=window.open('','_blank');
+  w.document.write(html);w.document.close();
+  w.onload=function(){w.focus();w.print();};
 }
 </script>
 </body>
