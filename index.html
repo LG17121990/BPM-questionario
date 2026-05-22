@@ -6,81 +6,147 @@
 <title>Questionario BPM — Governance e gestione flussi</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css">
 <style>
+:root{
+  --blue:#16395E;
+  --blue-mid:#1e4f85;
+  --blue-light:#2a6aad;
+  --blue-pale:#e8f0f8;
+  --blue-xpale:#f2f6fb;
+  --accent:#3b9eda;
+  --white:#ffffff;
+  --text:#1a2a3a;
+  --text-sec:#4a6275;
+  --border:#c5d6e8;
+  --green:#1a7a3c;
+  --green-bg:#e6f4ed;
+  --red:#b0001e;
+  --red-bg:#fdecea;
+}
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:system-ui,sans-serif;font-size:15px;color:#1a1a1a;background:#fff;padding:1.5rem;max-width:720px;margin:0 auto}
-h1{font-size:18px;font-weight:500;margin-bottom:4px}
-.sub{font-size:13px;color:#666;margin-bottom:2rem}
-.sec-title{font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:#666;margin-bottom:1rem;padding-bottom:.5rem;border-bottom:1px solid #eee}
-.field{margin-bottom:1.2rem}
-.field>label{display:block;font-size:14px;font-weight:500;margin-bottom:.4rem;line-height:1.4}
-.hint{font-size:12px;color:#888;margin-top:3px;font-style:italic}
-input[type=text],textarea{width:100%;padding:8px 10px;border:1px solid #ddd;border-radius:6px;font-size:14px;font-family:inherit;color:#1a1a1a;background:#fff}
-input[type=text]:focus,textarea:focus{outline:none;border-color:#555}
+body{font-family:system-ui,sans-serif;font-size:15px;color:var(--text);background:var(--blue-xpale);min-height:100vh}
+
+/* HEADER */
+.hdr{background:var(--blue);padding:1rem 1.5rem;display:flex;align-items:center;justify-content:space-between}
+.hdr-title{color:#fff;font-size:16px;font-weight:700;letter-spacing:.02em}
+.hdr-sub{color:rgba(255,255,255,.6);font-size:12px;margin-top:2px}
+.hdr-dot{width:36px;height:36px;background:var(--accent);border-radius:50%;opacity:.85}
+
+/* PROGRESS */
+.prog-wrap{background:var(--blue-mid);padding:.75rem 1.5rem}
+.prog-label{display:flex;justify-content:space-between;font-size:11px;color:rgba(255,255,255,.7);margin-bottom:6px}
+.prog{height:5px;background:rgba(255,255,255,.2);border-radius:3px;overflow:hidden}
+.progf{height:100%;background:var(--accent);border-radius:3px;transition:width .4s}
+
+/* CARD CONTAINER */
+.outer{max-width:700px;margin:0 auto;padding:1.5rem}
+.card{background:#fff;border-radius:12px;box-shadow:0 2px 12px rgba(22,57,94,.1);padding:1.75rem;margin-bottom:1rem}
+
+/* SECTION TITLE */
+.sec-title{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--blue);margin-bottom:1.1rem;padding-bottom:.5rem;border-bottom:2px solid var(--blue-pale);display:flex;align-items:center;gap:6px}
+
+/* FIELDS */
+.field{margin-bottom:1.25rem}
+.field>label{display:block;font-size:14px;font-weight:500;margin-bottom:.45rem;line-height:1.45;color:var(--text)}
+.hint{font-size:12px;color:var(--text-sec);margin-top:3px;font-style:italic}
+input[type=text],textarea{width:100%;padding:9px 12px;border:1.5px solid var(--border);border-radius:8px;font-size:14px;font-family:inherit;color:var(--text);background:#fff;transition:border-color .15s}
+input[type=text]:focus,textarea:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(59,158,218,.12)}
 textarea{resize:vertical;min-height:64px}
-.rg{display:flex;gap:.75rem;margin-top:.4rem;flex-wrap:wrap}
-.ro{display:flex;align-items:center;gap:6px;cursor:pointer;font-size:14px;padding:6px 16px;border:1px solid #ddd;border-radius:20px;transition:all .15s;user-select:none}
-.ro:hover{background:#f5f5f5}
-.ro.si{background:#e8f5e9;border-color:#4caf50;color:#1b5e20;font-weight:500}
-.ro.no{background:#ffebee;border-color:#f44336;color:#7f0000;font-weight:500}
-.ro.na{background:#f5f5f5;border-color:#999;color:#444;font-weight:500}
-.ckg{display:flex;flex-direction:column;gap:8px;margin-top:.4rem}
-.cko{display:flex;align-items:flex-start;gap:8px;font-size:14px;cursor:pointer;padding:4px 0;line-height:1.4}
-.cko input{width:auto;accent-color:#333;margin-top:3px;flex-shrink:0}
-.cond{margin-top:.6rem;padding:.75rem 1rem;background:#f9f9f9;border-radius:6px;border-left:2px solid #bbb;display:none}
+
+/* RADIO PILLS */
+.rg{display:flex;gap:.6rem;margin-top:.45rem;flex-wrap:wrap}
+.ro{display:flex;align-items:center;gap:6px;cursor:pointer;font-size:13.5px;padding:7px 18px;border:1.5px solid var(--border);border-radius:20px;transition:all .15s;user-select:none;background:#fff;color:var(--text)}
+.ro:hover{border-color:var(--accent);background:var(--blue-pale)}
+.ro.si{background:var(--green-bg);border-color:var(--green);color:var(--green);font-weight:600}
+.ro.no{background:var(--red-bg);border-color:var(--red);color:var(--red);font-weight:600}
+.ro.na{background:var(--blue-pale);border-color:var(--blue-light);color:var(--blue);font-weight:600}
+
+/* CHECKBOXES */
+.ckg{display:flex;flex-direction:column;gap:9px;margin-top:.45rem}
+.cko{display:flex;align-items:flex-start;gap:9px;font-size:14px;cursor:pointer;padding:5px 0;line-height:1.4;color:var(--text)}
+.cko input{width:auto;accent-color:var(--blue);margin-top:3px;flex-shrink:0}
+
+/* CONDITIONAL */
+.cond{margin-top:.65rem;padding:.8rem 1rem;background:var(--blue-xpale);border-radius:8px;border-left:3px solid var(--accent);display:none}
 .cond.on{display:block}
-.cond label{font-size:13px;color:#555;font-weight:400;margin-bottom:4px;display:block}
+.cond label{font-size:13px;color:var(--blue-mid);font-weight:600;margin-bottom:5px;display:block}
 .cond-inline{margin-top:.5rem;display:none}
 .cond-inline.on{display:block}
-.prog{height:4px;background:#eee;border-radius:2px;margin-bottom:2rem;overflow:hidden}
-.progf{height:100%;background:#333;border-radius:2px;transition:width .4s}
-.nav{display:flex;justify-content:space-between;align-items:center;margin-top:2rem;padding-top:1.5rem;border-top:1px solid #eee}
-.nav button{padding:8px 20px;border-radius:6px;font-size:14px;font-family:inherit;cursor:pointer;border:1px solid #ddd;background:#fff;color:#333}
-.nav button.p{background:#1a1a1a;color:#fff;border-color:#1a1a1a;font-weight:500}
-.nav button.p:hover{background:#333}
+
+/* SCALE */
+.scale-group{display:flex;flex-direction:column;gap:8px;margin-top:.45rem}
+.scale-opt{display:flex;align-items:center;gap:9px;font-size:14px;cursor:pointer;padding:5px 0}
+.scale-opt input{width:auto;accent-color:var(--blue)}
+
+/* NAV */
+.nav{display:flex;justify-content:space-between;align-items:center;margin-top:1.75rem;padding-top:1.25rem;border-top:1.5px solid var(--blue-pale)}
+.nav button{padding:9px 22px;border-radius:8px;font-size:14px;font-family:inherit;cursor:pointer;font-weight:500;transition:all .15s}
+.nav button.back{border:1.5px solid var(--border);background:#fff;color:var(--text-sec)}
+.nav button.back:hover{background:var(--blue-pale)}
+.nav button.p{background:var(--blue);color:#fff;border:none;padding:10px 26px;font-weight:600;letter-spacing:.02em}
+.nav button.p:hover{background:var(--blue-mid)}
 .nav button:disabled{opacity:.35;pointer-events:none}
-.nav .si{font-size:13px;color:#888}
+.nav .si{font-size:12px;color:var(--text-sec);background:var(--blue-pale);padding:4px 12px;border-radius:20px}
+
+/* PAGES */
 .pg{display:none}.pg.on{display:block}
-.rcs{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1rem}
-.rc{border:1px solid #ddd;border-radius:10px;padding:1.25rem 1rem;cursor:pointer;transition:all .15s;text-align:center;background:#fff}
-.rc:hover{background:#f5f5f5}
-.rc.sel{border:2px solid #1a1a1a;background:#fafafa}
-.rc .ri{font-size:28px;margin-bottom:.5rem;color:#555}
-.rc .rl{font-size:14px;font-weight:500}
-.rc .rd{font-size:12px;color:#888;margin-top:4px}
-.sb{background:#f5f5f5;border-radius:8px;padding:1.25rem;margin-bottom:1rem}
-.sb h3{font-size:12px;font-weight:600;color:#666;text-transform:uppercase;letter-spacing:.05em;margin-bottom:.75rem}
-.sr{display:flex;gap:1rem;padding:6px 0;border-bottom:1px solid #eee;font-size:13px;align-items:flex-start}
-.sr:last-child{border-bottom:none}
-.sq{color:#666;flex:2;line-height:1.4}
-.sa{flex:1;font-weight:500}
-.by{display:inline-block;padding:2px 8px;border-radius:20px;font-size:12px;font-weight:500;background:#e8f5e9;color:#1b5e20}
-.bn{display:inline-block;padding:2px 8px;border-radius:20px;font-size:12px;font-weight:500;background:#ffebee;color:#7f0000}
-.bna{display:inline-block;padding:2px 8px;border-radius:20px;font-size:12px;font-weight:500;background:#f5f5f5;color:#888}
-.rpill{display:inline-block;background:#eee;padding:3px 12px;border-radius:20px;font-size:12px;font-weight:500;margin-bottom:1rem}
-.egrid{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;margin-top:.75rem}
-.ebtn{padding:10px 16px;border-radius:6px;font-size:14px;font-weight:500;cursor:pointer;font-family:inherit;display:flex;align-items:center;justify-content:center;gap:7px;transition:all .15s;border:none}
-.ecsv{background:#1a1a1a;color:#fff}
-.ecsv:hover{background:#333}
-.epdf{background:#fff;color:#1a1a1a;border:1px solid #ddd}
-.epdf:hover{background:#f5f5f5}
-.esend{background:#1a1a1a;color:#fff;width:100%;margin-top:1rem;padding:12px;font-size:15px}
-.esend:hover{background:#333}
-.esend:disabled{background:#999;cursor:not-allowed}
-.toast{position:fixed;bottom:1.5rem;left:50%;transform:translateX(-50%);background:#1a1a1a;color:#fff;padding:10px 20px;border-radius:6px;font-size:13px;font-weight:500;opacity:0;transition:opacity .3s;pointer-events:none;z-index:999}
-.toast.on{opacity:1}
-.req{color:#c00}
-.scale-group{display:flex;flex-direction:column;gap:8px;margin-top:.4rem}
-.scale-opt{display:flex;align-items:center;gap:8px;font-size:14px;cursor:pointer;padding:4px 0}
-.scale-opt input{width:auto;accent-color:#333}
 .skip{display:none}
+
+/* ROLE CARDS */
+.rcs{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1rem}
+.rc{border:2px solid var(--border);border-radius:12px;padding:1.5rem 1rem;cursor:pointer;transition:all .15s;text-align:center;background:#fff}
+.rc:hover{border-color:var(--accent);background:var(--blue-pale)}
+.rc.sel{border-color:var(--blue);background:var(--blue-pale);box-shadow:0 0 0 3px rgba(22,57,94,.1)}
+.rc .ri{font-size:32px;margin-bottom:.6rem;color:var(--blue)}
+.rc .rl{font-size:14px;font-weight:700;color:var(--blue)}
+.rc .rd{font-size:12px;color:var(--text-sec);margin-top:4px}
+
+/* SUMMARY */
+.sum-header{background:var(--blue);border-radius:10px;padding:1rem 1.25rem;margin-bottom:1.25rem;display:flex;align-items:center;gap:12px}
+.rpill{background:rgba(255,255,255,.18);color:#fff;padding:4px 14px;border-radius:20px;font-size:12px;font-weight:700;border:1px solid rgba(255,255,255,.3)}
+.sum-sub{font-size:12px;color:rgba(255,255,255,.65)}
+.sb{border:1.5px solid var(--border);border-radius:10px;overflow:hidden;margin-bottom:1rem}
+.sb h3{background:var(--blue-pale);padding:8px 14px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--blue);border-bottom:1.5px solid var(--border)}
+.sr{display:flex;gap:1rem;padding:8px 14px;border-bottom:1px solid var(--blue-xpale);font-size:13px;align-items:flex-start}
+.sr:last-child{border-bottom:none}
+.sq{color:var(--text-sec);flex:2;line-height:1.4}
+.sa{flex:1;font-weight:500;color:var(--text)}
+.by{display:inline-block;padding:2px 9px;border-radius:20px;font-size:12px;font-weight:600;background:var(--green-bg);color:var(--green)}
+.bn{display:inline-block;padding:2px 9px;border-radius:20px;font-size:12px;font-weight:600;background:var(--red-bg);color:var(--red)}
+.bna{display:inline-block;padding:2px 9px;border-radius:20px;font-size:12px;font-weight:600;background:var(--blue-pale);color:var(--blue)}
+
+/* EXPORT */
+.egrid{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;margin-top:.75rem}
+.ebtn{padding:10px 16px;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;font-family:inherit;display:flex;align-items:center;justify-content:center;gap:7px;transition:all .15s;border:none}
+.ecsv{background:var(--blue);color:#fff}
+.ecsv:hover{background:var(--blue-mid)}
+.epdf{background:#fff;color:var(--blue);border:1.5px solid var(--border)}
+.epdf:hover{background:var(--blue-pale)}
+.esend{background:var(--blue);color:#fff;width:100%;margin-top:1rem;padding:13px;font-size:15px;border-radius:8px;border:none;font-weight:700;letter-spacing:.02em}
+.esend:hover{background:var(--blue-mid)}
+.esend:disabled{background:#8fa8bf;cursor:not-allowed}
+
+/* TOAST */
+.toast{position:fixed;bottom:1.5rem;left:50%;transform:translateX(-50%);background:var(--blue);color:#fff;padding:10px 22px;border-radius:8px;font-size:13px;font-weight:600;opacity:0;transition:opacity .3s;pointer-events:none;z-index:999;box-shadow:0 4px 16px rgba(22,57,94,.3)}
+.toast.on{opacity:1}
+.req{color:var(--red)}
 </style>
 </head>
 <body>
-<h1>Governance e gestione flussi</h1>
-<p class="sub">Questionario BPM — SD3 · v2.0 · 15/05/2026 · Regione Emilia-Romagna</p>
-<div class="prog"><div class="progf" id="pf" style="width:0%"></div></div>
+<div class="hdr">
+  <div>
+    <div class="hdr-title">Governance e gestione flussi</div>
+    <div class="hdr-sub">Questionario BPM — SD3 · v2.0 · Regione Emilia-Romagna</div>
+  </div>
+  <div class="hdr-dot"></div>
+</div>
+<div class="prog-wrap">
+  <div class="prog-label"><span id="prog-lbl">Selezione ruolo</span><span id="prog-pct">0%</span></div>
+  <div class="prog"><div class="progf" id="pf" style="width:0%"></div></div>
+</div>
+<div class="outer">
 
 <!-- P0 ruolo -->
+<div class="card">
 <div class="pg on" id="p0">
 <div class="sec-title">Ruolo</div>
 <div class="field">
@@ -99,10 +165,10 @@ textarea{resize:vertical;min-height:64px}
   </div>
 </div>
 <div class="nav"><span></span><span></span><button class="p" id="bstart" onclick="startQ()" disabled>Inizia →</button></div>
-</div>
+</div></div>
 
 <!-- ===== TECNICO ===== -->
-
+<div class="card">
 <!-- T-A: Identificazione -->
 <div class="pg" id="pTA">
 <div class="sec-title">Identificazione</div>
@@ -140,10 +206,8 @@ textarea{resize:vertical;min-height:64px}
   <div class="cond" id="cd_t5"><label>Specificare su quale sistema avvengono i controlli</label><textarea id="tx_t5"></textarea></div>
 </div>
 
-<div class="nav"><button onclick="go('pTA',1,6)">← Indietro</button><span class="si">Sezione 2 di 6</span><button class="p" onclick="go('pTC',3,6)">Avanti →</button></div>
-</div>
-
-<!-- T-C: Azioni correttive -->
+<div class="nav"><button class="back" onclick="go('pTA',1,6)">← Indietro</button><span class="si">Sezione 2 di 6</span><button class="p" onclick="go('pTC',3,6)">Avanti →</button></div>
+</div></div><div class="card"><!-- T-C: Azioni correttive -->
 <div class="pg" id="pTC">
 <div class="sec-title">Azioni correttive</div>
 
