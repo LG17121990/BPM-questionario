@@ -201,7 +201,10 @@ textarea{resize:vertical;min-height:64px}
 <div class="field skip" id="q4wrap">
   <label>4. Sono previsti controlli logico-formali scartanti sul flusso in SISEPS?</label>
   <div class="rg" id="rg_t4"></div>
-
+  <div class="cond" id="cd_t4no">
+    <label>Specificare se sono previsti controlli ex-post manuali, controlli automatici non scartanti (es. warning), o altre modalità di validazione dati</label>
+    <textarea id="tx_t4no"></textarea>
+  </div>
 </div>
 
 <!-- Q5: solo se Non applicabile -->
@@ -211,6 +214,10 @@ textarea{resize:vertical;min-height:64px}
   <div class="cond" id="cd_t5si">
     <label>Specificare su che sistema sono previsti tali controlli</label>
     <textarea id="tx_t5"></textarea>
+  </div>
+  <div class="cond" id="cd_t5no">
+    <label>Specificare se sono previsti controlli ex-post manuali, controlli automatici non scartanti (es. warning), o altre modalità di validazione dati</label>
+    <textarea id="tx_t5no"></textarea>
   </div>
 </div>
 
@@ -226,21 +233,26 @@ textarea{resize:vertical;min-height:64px}
     <label>Specificare la modalità di gestione degli scarti o se non è presente alcuna modalità di gestione</label>
     <textarea id="tx_t7"></textarea>
   </div>
+  <div class="cond" id="cd_t6na">
+    <label>Specificare il motivo</label>
+    <textarea id="tx_t6na"></textarea>
+  </div>
 </div>
 
 <!-- Q8: solo se sì a Q6 -->
 <div class="field skip" id="q8wrap">
-  <label>8. Nel caso in cui venga trasmesso il ritorno informativo alle Aziende, la gestione è presidiata dal referente tecnico?</label>
+  <label>7. Nel caso in cui venga trasmesso il ritorno informativo alle Aziende, la gestione è presidiata dal referente tecnico (es. invio del ritorno informativo, responsabilità delle attività correlate alla trasmissione del ritorno informativo alle aziende)?</label>
   <div class="rg" id="rg_t8"></div>
   <!-- Q9: se No -->
   <div class="cond" id="cd_t9">
-    <label>9. Specificare quale altro attore gestisce la trasmissione del ritorno informativo</label>
+    <label>Specificare quale altro attore presidia la gestione del ritorno informativo e con quali modalità</label>
     <input type="text" id="tx_t9">
   </div>
 </div>
 
+<div id="q10q12wrap">
 <div class="field">
-  <label>10. Viene monitorata la correzione degli scarti del flusso regionale da parte delle Aziende?</label>
+  <label>8. Viene monitorata la correzione degli scarti del flusso regionale da parte delle Aziende?</label>
   <div class="rg" id="rg_t10"></div>
   <div class="cond" id="cd_t11">
     <label>Specificare con quale modalità si tiene traccia delle azioni correttive (ad es. con indicatori di completezza dei dati, etc..)</label>
@@ -249,13 +261,14 @@ textarea{resize:vertical;min-height:64px}
 </div>
 
 <div class="field">
-  <label>12. Sono previsti solleciti alle Aziende in caso di mancata correzione degli scarti?</label>
+  <label>9. Sono previsti solleciti alle Aziende in caso di mancata correzione degli scarti?</label>
   <div class="rg" id="rg_t12"></div>
   <!-- Q13: se No -->
   <div class="cond" id="cd_t13">
     <label>Specificare eventuali altre modalità di gestione delle azioni correttive e di ritrasmissione dei dati da parte delle Aziende, indicando chi ne è responsabile oppure se tali processi non sono presenti</label>
     <textarea id="tx_t13"></textarea>
   </div>
+</div>
 </div>
 
 <div class="nav"><button onclick="go('pTB',2,6)">← Indietro</button><span class="si">Sezione 3 di 6</span><button class="p" onclick="go('pTD',4,6)">Avanti →</button></div>
@@ -266,12 +279,12 @@ textarea{resize:vertical;min-height:64px}
 <div class="sec-title">Generazione e trasmissione verso enti terzi</div>
 
 <div class="field">
-  <label>14. Nel caso in cui il flusso sia destinato a un Ente Terzo, il processo di trascodifica, controlli e generazione è gestito interamente dal fornitore/referente tecnico?</label>
+  <label>10. Nel caso in cui il flusso sia destinato a un Ente Terzo, il processo di trascodifica, controlli e generazione è gestito interamente dal fornitore/referente tecnico?</label>
   <p class="hint">Selezionare "Non applicabile" se il flusso non è destinato a Enti Terzi</p>
   <div class="rg" id="rg_t14"></div>
   <!-- Q15: se No -->
   <div class="cond" id="cd_t15">
-    <label>15. Specificare quale altro attore gestisce questa fase</label>
+    <label>Specificare quale altro attore gestisce questa fase e con quali modalità</label>
     <input type="text" id="tx_t15">
   </div>
 </div>
@@ -280,61 +293,61 @@ textarea{resize:vertical;min-height:64px}
 <div id="q16_27wrap">
 
 <div class="field">
-  <label>16. Il processo di trasmissione del flusso verso l'Ente Terzo è gestito dal referente tecnico?</label>
+  <label>11. Il processo di trasmissione del flusso verso l'Ente Terzo è gestito dal referente tecnico?</label>
   <div class="rg" id="rg_t16"></div>
   <!-- Q17: se No -->
   <div class="cond" id="cd_t17">
-    <label>17. Specificare quale altro attore gestisce questa fase</label>
+    <label>Specificare quale altro attore gestisce questa fase e con quali modalità</label>
     <input type="text" id="tx_t17">
   </div>
 </div>
 
 <div class="field">
-  <label>18. Vengono sistematicamente richieste aperture eccezionali delle finestre di invio per il flusso verso Enti Terzi?</label>
+  <label>12. Vengono sistematicamente richieste aperture eccezionali delle finestre di invio per il flusso verso Enti Terzi?</label>
   <div class="rg" id="rg_t18"></div>
   <!-- Q19: se Sì -->
   <div class="cond" id="cd_t19">
-    <label>19. Specificare il numero indicativo di richieste, le motivazioni prevalenti e se sono stati adottati interventi strutturali per ridurne la ricorrenza</label>
+    <label>Specificare il numero indicativo di richieste, le motivazioni prevalenti e se sono stati adottati interventi strutturali per ridurne la ricorrenza</label>
     <textarea id="tx_t19"></textarea>
   </div>
 </div>
 
 <div class="field">
-  <label>20. Il processo di gestione del ritorno informativo dell'Ente Terzo è gestito dal referente tecnico?</label>
+  <label>13. Il processo di gestione del ritorno informativo dell'Ente Terzo è gestito dal referente tecnico (es. scarico e salvataggio ritorno NSIS)?</label>
   <div class="rg" id="rg_t20"></div>
   <!-- Q21: se No -->
   <div class="cond" id="cd_t21">
-    <label>21. Specificare quale altro attore gestisce questa fase</label>
+    <label>Specificare come e da chi viene presidiata la gestione del ritorno informativo (es. scarico e salvataggio ritorno NSIS)</label>
     <input type="text" id="tx_t21">
   </div>
 </div>
 
 <div class="field">
-  <label>22. In caso di scarti imputabili alla Regione (es. errori di trascodifica), viene corretta la procedura di trascodifica e rigenerato il flusso?</label>
+  <label>14. In caso di scarti imputabili alla Regione (es. errori di trascodifica), viene corretta la procedura di trascodifica e rigenerato il flusso?</label>
   <div class="rg" id="rg_t22"></div>
   <!-- Q23: se No -->
   <div class="cond" id="cd_t23">
-    <label>23. Specificare la modalità di gestione adottata per questa tipologia di scarti</label>
+    <label>Specificare la modalità di gestione adottata per questa tipologia di scarti</label>
     <textarea id="tx_t23"></textarea>
   </div>
 </div>
 
 <div class="field">
-  <label>24. La correzione della procedura di trascodifica è eseguita dal fornitore su input del referente tecnico?</label>
+  <label>15. La correzione della procedura di trascodifica è eseguita dal fornitore su input del referente tecnico?</label>
   <div class="rg" id="rg_t24"></div>
   <!-- Q25: se No -->
   <div class="cond" id="cd_t25">
-    <label>25. Specificare chi esegue la correzione e con quali modalità</label>
+    <label>Specificare chi esegue la correzione e con quali modalità</label>
     <input type="text" id="tx_t25">
   </div>
 </div>
 
 <div class="field">
-  <label>26. Il flusso inviato all'Ente Terzo viene archiviato nel DWH regionale di Livello 0? (es. Libreria NSIS)</label>
+  <label>16. Il flusso inviato all'Ente Terzo viene archiviato nel DWH regionale di Livello 0? (es. Libreria NSIS)</label>
   <div class="rg" id="rg_t26"></div>
   <!-- Q27: se No -->
   <div class="cond" id="cd_t27">
-    <label>27. Specificare dove viene conservato il flusso trasmesso ad Enti Terzi</label>
+    <label>Specificare dove viene conservato il flusso trasmesso ad Enti Terzi</label>
     <input type="text" id="tx_t27">
   </div>
 </div>
@@ -349,7 +362,7 @@ textarea{resize:vertical;min-height:64px}
 <div class="sec-title">Reportistica</div>
 
 <div class="field">
-  <label>28. Per quali dimensioni di qualità del dato viene prodotta reportistica?</label>
+  <label>17. Per quali dimensioni di qualità del dato viene prodotta reportistica?</label>
   <div class="ckg">
     <div>
       <label class="cko"><input type="checkbox" id="ck28a" onchange="onCk28('ck28a','tx28a')"> Qualità formale — es. monitoraggio degli scarti generati in fase di validazione</label>
@@ -372,11 +385,12 @@ textarea{resize:vertical;min-height:64px}
       <div class="cond-inline" id="tx28e_w"><input type="text" id="tx28e" placeholder="Specificare cosa viene elaborato..."></div>
     </div>
     <label class="cko"><input type="checkbox" id="ck28f" onchange="onCk28None('t')"> Nessuna</label>
+    <label class="cko"><input type="checkbox" id="ck28g" onchange="onCk28NoneOrNonSo('ck28g','t')"> Non so</label>
   </div>
 </div>
 
 <div class="field">
-  <label>29. Vengono effettuati incontri periodici con le Aziende?</label>
+  <label>18. Vengono effettuati incontri periodici con le Aziende, almeno una volta l'anno?</label>
   <div class="rg" id="rg_t29"></div>
   <div class="cond" id="cd_t30">
     <label>Specificare le modalità di gestione e in merito a quali tematiche</label>
@@ -389,7 +403,7 @@ textarea{resize:vertical;min-height:64px}
 </div>
 
 <div class="field">
-  <label>31. Viene prodotta reportistica al di fuori di ReportER?</label>
+  <label>19. Viene prodotta reportistica al di fuori di ReportER?</label>
   <div class="rg" id="rg_t31"></div>
   <div class="cond" id="cd_t32">
     <label>Specificare che tipo di indicatori/report sono prodotti e in che ambiente</label>
@@ -405,38 +419,38 @@ textarea{resize:vertical;min-height:64px}
 <div class="sec-title">Gestione del flusso</div>
 
 <div class="field">
-  <label>33. Sono previsti incontri di allineamento periodici con i referenti organizzativi regionali?</label>
+  <label>20. Sono previsti confronti informali e/o incontri di allineamento periodici con i referenti organizzativi regionali?</label>
   <div class="rg" id="rg_t33"></div>
   <div class="cond" id="cd_t34">
     <label>Specificare quali sono le tematiche trattate</label>
     <textarea id="tx_t34"></textarea>
   </div>
   <div class="cond" id="cd_t33no">
-    <label>Specificare il motivo per cui non sono previsti incontri di allineamento periodici con i referenti organizzativi regionali</label>
+    <label>Specificare il motivo per cui non sono previsti confronti informali e/o incontri di allineamento periodici con i referenti organizzativi regionali</label>
     <textarea id="tx_t33no"></textarea>
   </div>
 </div>
 
 <div class="field">
-  <label>35. In caso di variazione delle date di scadenza previste per il flusso regionale, il referente tecnico regionale si raccorda con il referente organizzativo regionale?</label>
+  <label>21. In caso di variazione delle date di scadenza previste per il flusso regionale, il referente tecnico regionale si raccorda con il referente organizzativo regionale?</label>
   <div class="rg" id="rg_t35"></div>
   <div class="cond" id="cd_t36">
-    <label>36. Specificare le modalità di gestione o se non avviene alcun allineamento</label>
+    <label>Specificare le modalità di gestione o se non avviene alcun allineamento</label>
     <textarea id="tx_t36"></textarea>
   </div>
 </div>
 
 <div class="field">
-  <label>37. Ci sono delle fasi progettuali legate al flusso in cui ti piacerebbe essere coinvolto di più?</label>
+  <label>22. Ci sono delle fasi progettuali legate al flusso in cui ti piacerebbe essere coinvolto di più?</label>
   <div class="rg" id="rg_t37"></div>
   <div class="cond" id="cd_t38">
-    <label>38. Specificare in quali fasi progettuali</label>
+    <label>Specificare in quali fasi progettuali</label>
     <textarea id="tx_t38"></textarea>
   </div>
 </div>
 
 <div class="field">
-  <label>39. Ritieni che l'attuale gestione del flusso sia efficace?</label>
+  <label>23. Ritieni che l'attuale gestione del flusso sia efficace?</label>
   <div class="scale-group" id="sg_t39">
     <label class="scale-opt"><input type="radio" name="t39" value="Per nulla" onchange="onScale('t39','cd_t39m')"> Per nulla</label>
     <label class="scale-opt"><input type="radio" name="t39" value="Poco" onchange="onScale('t39','cd_t39m')"> Poco</label>
@@ -477,7 +491,7 @@ textarea{resize:vertical;min-height:64px}
 </div>
 
 <div class="field">
-  <label>5. Sono previsti solleciti alle Aziende in caso di mancata correzione degli scarti?</label>
+  <label>4. Sono previsti solleciti alle Aziende in caso di mancata correzione degli scarti?</label>
   <div class="rg" id="rg_o5"></div>
   <div class="cond" id="cd_o6">
     <label>Specificare eventuali altre modalità di gestione delle azioni correttive e di ritrasmissione dei dati da parte delle Aziende, indicando chi ne è responsabile oppure se tali processi non sono presenti</label>
@@ -486,10 +500,10 @@ textarea{resize:vertical;min-height:64px}
 </div>
 
 <div class="field">
-  <label>7. Qualora necessario è previsto il coinvolgimento del referente organizzativo per l'adeguamento delle specifiche funzionali/circolari?</label>
+  <label>5. Qualora necessario è previsto il coinvolgimento del referente organizzativo per l'adeguamento delle specifiche funzionali/circolari?</label>
   <div class="rg" id="rg_o7"></div>
   <div class="cond" id="cd_o8">
-    <label>8. Specificare come viene gestita questa attività</label>
+    <label>Specificare come viene gestita questa attività</label>
     <textarea id="tx_o8"></textarea>
   </div>
 </div>
@@ -502,7 +516,7 @@ textarea{resize:vertical;min-height:64px}
 <div class="sec-title">Reportistica</div>
 
 <div class="field">
-  <label>9. Per quali dimensioni di qualità del dato viene prodotta reportistica?</label>
+  <label>6. Per quali dimensioni di qualità del dato viene prodotta reportistica?</label>
   <div class="ckg">
     <div>
       <label class="cko"><input type="checkbox" id="ck9a" onchange="onCk28('ck9a','tx9a')"> Qualità formale — es. monitoraggio degli scarti generati in fase di validazione</label>
@@ -525,11 +539,12 @@ textarea{resize:vertical;min-height:64px}
       <div class="cond-inline" id="tx9e_w"><input type="text" id="tx9e" placeholder="Specificare cosa viene elaborato..."></div>
     </div>
     <label class="cko"><input type="checkbox" id="ck9f" onchange="onCk28None('o')"> Nessuna</label>
+    <label class="cko"><input type="checkbox" id="ck9g" onchange="onCk28NoneOrNonSo('ck9g','o')"> Non so</label>
   </div>
 </div>
 
 <div class="field">
-  <label>10. Vengono effettuati incontri periodici con le Aziende?</label>
+  <label>7. Vengono effettuati incontri periodici con le Aziende, almeno una volta l'anno?</label>
   <div class="rg" id="rg_o10"></div>
   <div class="cond" id="cd_o11">
     <label>Specificare le modalità di gestione e in merito a quali tematiche</label>
@@ -542,7 +557,7 @@ textarea{resize:vertical;min-height:64px}
 </div>
 
 <div class="field">
-  <label>12. Viene prodotta reportistica al di fuori di ReportER?</label>
+  <label>8. Viene prodotta reportistica al di fuori di ReportER?</label>
   <div class="rg" id="rg_o12"></div>
   <div class="cond" id="cd_o13">
     <label>Specificare che tipo di indicatori/report sono prodotti e in che ambiente</label>
@@ -551,7 +566,7 @@ textarea{resize:vertical;min-height:64px}
 </div>
 
 <div class="field">
-  <label>14. Sono presenti degli indicatori su Siver?</label>
+  <label>9. Sono presenti degli indicatori su Siver?</label>
   <div class="rg" id="rg_o14"></div>
   <div class="cond" id="cd_o14si">
     <label>Specificare come avviene il monitoraggio degli indicatori su Siver</label>
@@ -567,20 +582,20 @@ textarea{resize:vertical;min-height:64px}
 <div class="sec-title">Gestione del flusso</div>
 
 <div class="field">
-  <label>15. Sono previsti incontri di allineamento periodici con i referenti tecnici regionali?</label>
+  <label>10. Sono previsti confronti informali e/o incontri di allineamento periodici con i referenti tecnici regionali?</label>
   <div class="rg" id="rg_o15"></div>
   <div class="cond" id="cd_o16">
     <label>Specificare quali sono le tematiche trattate</label>
     <textarea id="tx_o16"></textarea>
   </div>
   <div class="cond" id="cd_o15no">
-    <label>Specificare il motivo per cui non sono previsti incontri di allineamento periodici con i referenti tecnici regionali</label>
+    <label>Specificare il motivo per cui non sono previsti confronti informali e/o incontri di allineamento periodici con i referenti tecnici regionali</label>
     <textarea id="tx_o15no"></textarea>
   </div>
 </div>
 
 <div class="field">
-  <label>17. Ci sono delle fasi progettuali legate al flusso in cui ti piacerebbe essere coinvolto di più?</label>
+  <label>11. Ci sono delle fasi progettuali legate al flusso in cui ti piacerebbe essere coinvolto di più?</label>
   <div class="rg" id="rg_o17"></div>
   <div class="cond" id="cd_o17d">
     <label>Specificare in quale fase progetturale</label>
@@ -589,7 +604,7 @@ textarea{resize:vertical;min-height:64px}
 </div>
 
 <div class="field">
-  <label>18. Ritieni che l'attuale gestione del flusso sia efficace?</label>
+  <label>12. Ritieni che l'attuale gestione del flusso sia efficace?</label>
   <div class="scale-group">
     <label class="scale-opt"><input type="radio" name="o18" value="Per nulla" onchange="onScale('o18','cd_o18m')"> Per nulla</label>
     <label class="scale-opt"><input type="radio" name="o18" value="Poco" onchange="onScale('o18','cd_o18m')"> Poco</label>
@@ -625,9 +640,9 @@ var SHEET='https://script.google.com/macros/s/AKfycbwYiYE0LU30GZRBMpgyiwNvCmycXV
 
 // ---- Radio groups setup ----
 var rgConf={
-  rg_t4:{cond:null,si:false,no:false},
-  rg_t5:{cond:'cd_t5si',si:true,no:false},
-  rg_t6:{cond:'cd_t7',si:false,no:true,extraSi:'q8wrap'},
+  rg_t4:{cond:null,si:false,no:false,condNo:'cd_t4no'},
+  rg_t5:{cond:'cd_t5si',si:true,no:false,condNo:'cd_t5no'},
+  rg_t6:{cond:'cd_t7',si:false,no:true,extraSi:'q8wrap',condNa:'cd_t6na',naHide:'q10q12wrap'},
   rg_t8:{cond:'cd_t9',si:false,no:true},
   rg_t10:{cond:'cd_t11',si:true,no:false},
   rg_t12:{cond:'cd_t13',si:false,no:true},
@@ -656,7 +671,7 @@ var rgConf={
 // Radio groups with "Non so" option
 var rgNonSo=['rg_o3','rg_o5'];
 // Radio groups with "Non applicabile" option
-var rgNonApp=['rg_t14','rg_o3','rg_t24'];
+var rgNonApp=['rg_t14','rg_o3','rg_t24','rg_t6'];
 
 function buildRGs(){
   Object.keys(rgConf).forEach(function(id){
@@ -706,6 +721,11 @@ function setR(rgId,vv){
   if(cfg.condNo){
     var cn=document.getElementById(cfg.condNo);
     if(cn) cn.className='cond'+(vv==='no'?' on':'');
+  }
+  // condNa: mostra campo su Non applicabile
+  if(cfg.condNa){
+    var cna=document.getElementById(cfg.condNa);
+    if(cna) cna.className='cond'+(vv==='na'?' on':'');
   }
   // hide block on NA (q16_27wrap)
   if(cfg.naHide){
@@ -764,6 +784,8 @@ function onCk28(ckId,txId){
     var prefix=ckId.startsWith('ck28')?'ck28':'ck9';
     var noneEl=document.getElementById(prefix+'f');
     if(noneEl) noneEl.checked=false;
+    var nsEl=document.getElementById(prefix+'g');
+    if(nsEl) nsEl.checked=false;
   }
 }
 function onCk28None(which){
@@ -774,6 +796,22 @@ function onCk28None(which){
       var ck=document.getElementById(prefix+l);
       if(ck){ck.checked=false; onCk28(prefix+l,(which==='t'?'tx28':'tx9')+l);}
     });
+    // deseleziona anche Non so
+    var ns=document.getElementById(prefix+'g');
+    if(ns) ns.checked=false;
+  }
+}
+function onCk28NoneOrNonSo(ckId,which){
+  var prefix=which==='t'?'ck28':'ck9';
+  if(document.getElementById(ckId).checked){
+    // deseleziona a-e
+    ['a','b','c','d','e'].forEach(function(l){
+      var ck=document.getElementById(prefix+l);
+      if(ck){ck.checked=false; onCk28(prefix+l,(which==='t'?'tx28':'tx9')+l);}
+    });
+    // deseleziona Nessuna
+    var noneEl=document.getElementById(prefix+'f');
+    if(noneEl) noneEl.checked=false;
   }
 }
 
