@@ -202,7 +202,7 @@ textarea{resize:vertical;min-height:64px}
   <label>4. Sono previsti controlli logico-formali scartanti sul flusso in SISEPS?</label>
   <div class="rg" id="rg_t4"></div>
   <div class="cond" id="cd_t4no">
-    <label>Specificare se sono previsti controlli ex-post manuali, controlli automatici non scartanti (es. warning), o altre modalità di validazione dati</label>
+    <label>Inserire eventuali argomentazioni a dettaglio della risposta</label>
     <textarea id="tx_t4no"></textarea>
   </div>
 </div>
@@ -212,11 +212,11 @@ textarea{resize:vertical;min-height:64px}
   <label>5. Sono previsti controlli logico-formali sul flusso (es. a monte nell'applicativo di data entry, altro sistema)?</label>
   <div class="rg" id="rg_t5"></div>
   <div class="cond" id="cd_t5si">
-    <label>Specificare su che sistema sono previsti tali controlli</label>
+    <label>Specificare quali tipi di controlli sono previsti e su quale sistema</label>
     <textarea id="tx_t5"></textarea>
   </div>
   <div class="cond" id="cd_t5no">
-    <label>Specificare se sono previsti controlli ex-post manuali, controlli automatici non scartanti (es. warning), o altre modalità di validazione dati</label>
+    <label>Specificare per quale motivo non sono previsti controlli in fase di acquisizione</label>
     <textarea id="tx_t5no"></textarea>
   </div>
 </div>
@@ -228,9 +228,10 @@ textarea{resize:vertical;min-height:64px}
 
 <div class="field">
   <label>6. In caso di scarto del record, viene trasmesso un ritorno informativo all'Azienda?</label>
+  <p class="hint">Selezionare "Non applicabile" se il flusso non prevede scarti</p>
   <div class="rg" id="rg_t6"></div>
   <div class="cond" id="cd_t7">
-    <label>Specificare la modalità di gestione degli scarti o se non è presente alcuna modalità di gestione</label>
+    <label>Specificare la modalità di gestione degli scarti oppure specificare se non è presente alcuna modalità di gestione</label>
     <textarea id="tx_t7"></textarea>
   </div>
   <div class="cond" id="cd_t6na">
@@ -239,6 +240,7 @@ textarea{resize:vertical;min-height:64px}
   </div>
 </div>
 
+<div id="q789wrap">
 <!-- Q8: solo se sì a Q6 -->
 <div class="field skip" id="q8wrap">
   <label>7. Nel caso in cui venga trasmesso il ritorno informativo alle Aziende, la gestione è presidiata dal referente tecnico (es. invio del ritorno informativo, responsabilità delle attività correlate alla trasmissione del ritorno informativo alle aziende)?</label>
@@ -265,11 +267,12 @@ textarea{resize:vertical;min-height:64px}
   <div class="rg" id="rg_t12"></div>
   <!-- Q13: se No -->
   <div class="cond" id="cd_t13">
-    <label>Specificare eventuali altre modalità di gestione delle azioni correttive e di ritrasmissione dei dati da parte delle Aziende, indicando chi ne è responsabile oppure se tali processi non sono presenti</label>
+    <label>Specificare eventuali altre modalità di gestione dei solleciti alle Aziende, indicando chi ne è responsabile</label>
     <textarea id="tx_t13"></textarea>
   </div>
 </div>
 </div>
+</div><!-- /q789wrap -->
 
 <div class="nav"><button onclick="go('pTB',2,6)">← Indietro</button><span class="si">Sezione 3 di 6</span><button class="p" onclick="go('pTD',4,6)">Avanti →</button></div>
 </div>
@@ -313,7 +316,7 @@ textarea{resize:vertical;min-height:64px}
 </div>
 
 <div class="field">
-  <label>13. Il processo di gestione del ritorno informativo dell'Ente Terzo è gestito dal referente tecnico (es. scarico e salvataggio ritorno NSIS)?</label>
+  <label>13. Il processo di gestione (es. salvataggio, analisi, invio al fornitore) del ritorno informativo dell'Ente Terzo è gestito dal referente tecnico?</label>
   <div class="rg" id="rg_t20"></div>
   <!-- Q21: se No -->
   <div class="cond" id="cd_t21">
@@ -332,7 +335,7 @@ textarea{resize:vertical;min-height:64px}
   </div>
 </div>
 
-<div class="field">
+<div class="field" id="q15wrap">
   <label>15. La correzione della procedura di trascodifica è eseguita dal fornitore su input del referente tecnico?</label>
   <div class="rg" id="rg_t24"></div>
   <!-- Q25: se No -->
@@ -359,7 +362,7 @@ textarea{resize:vertical;min-height:64px}
 
 <!-- T-E: Reportistica -->
 <div class="pg" id="pTE">
-<div class="sec-title">Reportistica</div>
+<div class="sec-title">Reportistica e Incontri</div>
 
 <div class="field">
   <label>17. Per quali dimensioni di qualità del dato viene prodotta reportistica?</label>
@@ -390,7 +393,7 @@ textarea{resize:vertical;min-height:64px}
 </div>
 
 <div class="field">
-  <label>18. Vengono effettuati incontri periodici con le Aziende, almeno una volta l'anno?</label>
+  <label>18. Vengono effettuati incontri periodici (almeno una volta l'anno) con le Aziende?</label>
   <div class="rg" id="rg_t29"></div>
   <div class="cond" id="cd_t30">
     <label>Specificare le modalità di gestione e in merito a quali tematiche</label>
@@ -419,14 +422,14 @@ textarea{resize:vertical;min-height:64px}
 <div class="sec-title">Gestione del flusso</div>
 
 <div class="field">
-  <label>20. Sono previsti confronti informali e/o incontri di allineamento periodici con i referenti organizzativi regionali?</label>
+  <label>20. Sono previsti incontri di allineamento periodici con i referenti organizzativi regionali?</label>
   <div class="rg" id="rg_t33"></div>
   <div class="cond" id="cd_t34">
     <label>Specificare quali sono le tematiche trattate</label>
     <textarea id="tx_t34"></textarea>
   </div>
   <div class="cond" id="cd_t33no">
-    <label>Specificare il motivo per cui non sono previsti confronti informali e/o incontri di allineamento periodici con i referenti organizzativi regionali</label>
+    <label>Specificare il motivo per cui non sono previsti incontri di allineamento periodici con i referenti organizzativi regionali</label>
     <textarea id="tx_t33no"></textarea>
   </div>
 </div>
@@ -435,7 +438,7 @@ textarea{resize:vertical;min-height:64px}
   <label>21. In caso di variazione delle date di scadenza previste per il flusso regionale, il referente tecnico regionale si raccorda con il referente organizzativo regionale?</label>
   <div class="rg" id="rg_t35"></div>
   <div class="cond" id="cd_t36">
-    <label>Specificare le modalità di gestione o se non avviene alcun allineamento</label>
+    <label>Specificare le modalità di gestione</label>
     <textarea id="tx_t36"></textarea>
   </div>
 </div>
@@ -490,21 +493,12 @@ textarea{resize:vertical;min-height:64px}
   </div>
 </div>
 
-<div class="field">
+<div class="field" id="q4_org_wrap">
   <label>4. Sono previsti solleciti alle Aziende in caso di mancata correzione degli scarti?</label>
   <div class="rg" id="rg_o5"></div>
   <div class="cond" id="cd_o6">
-    <label>Specificare eventuali altre modalità di gestione delle azioni correttive e di ritrasmissione dei dati da parte delle Aziende, indicando chi ne è responsabile oppure se tali processi non sono presenti</label>
+    <label>Specificare eventuali altre modalità di gestione delle azioni correttive e di ritrasmissione dei dati da parte delle Aziende, indicando chi ne è responsabile</label>
     <textarea id="tx_o6"></textarea>
-  </div>
-</div>
-
-<div class="field">
-  <label>5. Qualora necessario è previsto il coinvolgimento del referente organizzativo per l'adeguamento delle specifiche funzionali/circolari?</label>
-  <div class="rg" id="rg_o7"></div>
-  <div class="cond" id="cd_o8">
-    <label>Specificare come viene gestita questa attività</label>
-    <textarea id="tx_o8"></textarea>
   </div>
 </div>
 
@@ -513,10 +507,10 @@ textarea{resize:vertical;min-height:64px}
 
 <!-- O-C: Reportistica -->
 <div class="pg" id="pOC">
-<div class="sec-title">Reportistica</div>
+<div class="sec-title">Reportistica e Incontri</div>
 
 <div class="field">
-  <label>6. Per quali dimensioni di qualità del dato viene prodotta reportistica?</label>
+  <label>5. Per quali dimensioni di qualità del dato viene prodotta reportistica?</label>
   <div class="ckg">
     <div>
       <label class="cko"><input type="checkbox" id="ck9a" onchange="onCk28('ck9a','tx9a')"> Qualità formale — es. monitoraggio degli scarti generati in fase di validazione</label>
@@ -544,7 +538,7 @@ textarea{resize:vertical;min-height:64px}
 </div>
 
 <div class="field">
-  <label>7. Vengono effettuati incontri periodici con le Aziende, almeno una volta l'anno?</label>
+  <label>6. Vengono effettuati incontri periodici (almeno una volta l'anno) con le Aziende?</label>
   <div class="rg" id="rg_o10"></div>
   <div class="cond" id="cd_o11">
     <label>Specificare le modalità di gestione e in merito a quali tematiche</label>
@@ -557,7 +551,7 @@ textarea{resize:vertical;min-height:64px}
 </div>
 
 <div class="field">
-  <label>8. Viene prodotta reportistica al di fuori di ReportER?</label>
+  <label>7. Viene prodotta reportistica al di fuori di ReportER?</label>
   <div class="rg" id="rg_o12"></div>
   <div class="cond" id="cd_o13">
     <label>Specificare che tipo di indicatori/report sono prodotti e in che ambiente</label>
@@ -566,7 +560,7 @@ textarea{resize:vertical;min-height:64px}
 </div>
 
 <div class="field">
-  <label>9. Sono presenti degli indicatori su Siver?</label>
+  <label>8. Sono presenti degli indicatori su Siver?</label>
   <div class="rg" id="rg_o14"></div>
   <div class="cond" id="cd_o14si">
     <label>Specificare come avviene il monitoraggio degli indicatori su Siver</label>
@@ -582,14 +576,23 @@ textarea{resize:vertical;min-height:64px}
 <div class="sec-title">Gestione del flusso</div>
 
 <div class="field">
-  <label>10. Sono previsti confronti informali e/o incontri di allineamento periodici con i referenti tecnici regionali?</label>
+  <label>9. È previsto il coinvolgimento del referente organizzativo per l'adeguamento periodico delle specifiche funzionali/circolari?</label>
+  <div class="rg" id="rg_o7"></div>
+  <div class="cond" id="cd_o8">
+    <label>Specificare come viene gestita questa attività</label>
+    <textarea id="tx_o8"></textarea>
+  </div>
+</div>
+
+<div class="field">
+  <label>10. Sono previsti incontri di allineamento periodici con i referenti tecnici regionali?</label>
   <div class="rg" id="rg_o15"></div>
   <div class="cond" id="cd_o16">
     <label>Specificare quali sono le tematiche trattate</label>
     <textarea id="tx_o16"></textarea>
   </div>
   <div class="cond" id="cd_o15no">
-    <label>Specificare il motivo per cui non sono previsti confronti informali e/o incontri di allineamento periodici con i referenti tecnici regionali</label>
+    <label>Specificare il motivo per cui non sono previsti incontri di allineamento periodici con i referenti tecnici regionali</label>
     <textarea id="tx_o15no"></textarea>
   </div>
 </div>
@@ -640,9 +643,9 @@ var SHEET='https://script.google.com/macros/s/AKfycbwYiYE0LU30GZRBMpgyiwNvCmycXV
 
 // ---- Radio groups setup ----
 var rgConf={
-  rg_t4:{cond:null,si:false,no:false,condNo:'cd_t4no'},
+  rg_t4:{cond:'cd_t4no',si:true,no:true},
   rg_t5:{cond:'cd_t5si',si:true,no:false,condNo:'cd_t5no'},
-  rg_t6:{cond:'cd_t7',si:false,no:true,extraSi:'q8wrap',condNa:'cd_t6na',naHide:'q10q12wrap'},
+  rg_t6:{cond:'cd_t7',si:false,no:true,extraSi:'q8wrap',condNa:'cd_t6na',naHide:'q10q12wrap',noHide:'q789wrap'},
   rg_t8:{cond:'cd_t9',si:false,no:true},
   rg_t10:{cond:'cd_t11',si:true,no:false},
   rg_t12:{cond:'cd_t13',si:false,no:true},
@@ -650,7 +653,7 @@ var rgConf={
   rg_t16:{cond:'cd_t17',si:false,no:true},
   rg_t18:{cond:'cd_t19',si:true,no:false},
   rg_t20:{cond:'cd_t21',si:false,no:true},
-  rg_t22:{cond:'cd_t23',si:false,no:true},
+  rg_t22:{cond:'cd_t23',si:false,no:true,noHide:'q15wrap'},
   rg_t24:{cond:'cd_t25',si:false,no:true},
   rg_t26:{cond:'cd_t27',si:false,no:true},
   rg_t29:{cond:'cd_t30',si:true,no:false,condNo:'cd_t30no'},
@@ -658,7 +661,7 @@ var rgConf={
   rg_t33:{cond:'cd_t34',si:true,no:false,condNo:'cd_t33no'},
   rg_t35:{cond:'cd_t36',si:true,no:false},
   rg_t37:{cond:'cd_t38',si:true,no:false},
-  rg_o3:{cond:'cd_o4',si:true,no:false,nonso:false},
+  rg_o3:{cond:'cd_o4',si:true,no:false,nonso:false,naHide:'q4_org_wrap'},
   rg_o5:{cond:'cd_o6',si:false,no:true,nonso:false},
   rg_o7:{cond:'cd_o8',si:false,no:true},
   rg_o10:{cond:'cd_o11',si:true,no:false,condNo:'cd_o10no'},
@@ -671,7 +674,7 @@ var rgConf={
 // Radio groups with "Non so" option
 var rgNonSo=['rg_o3','rg_o5'];
 // Radio groups with "Non applicabile" option
-var rgNonApp=['rg_t14','rg_o3','rg_t24','rg_t6'];
+var rgNonApp=['rg_t14','rg_o3','rg_t6'];
 
 function buildRGs(){
   Object.keys(rgConf).forEach(function(id){
@@ -731,6 +734,11 @@ function setR(rgId,vv){
   if(cfg.naHide){
     var hw=document.getElementById(cfg.naHide);
     if(hw) hw.style.display=vv==='na'?'none':'block';
+  }
+  // noHide: nascondi blocco su No
+  if(cfg.noHide){
+    var nh=document.getElementById(cfg.noHide);
+    if(nh) nh.style.display=vv==='no'?'none':'block';
   }
 }
 
