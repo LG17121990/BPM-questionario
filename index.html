@@ -224,7 +224,7 @@ textarea{resize:vertical;min-height:64px}
 <div class="nav"><button class="back" onclick="go('pTA',1,6)">← Indietro</button><span class="si">Sezione 2 di 6</span><button class="p" onclick="go('pTC',3,6)">Avanti →</button></div>
 </div></div><div class="card" id="card2"><!-- T-C: Azioni correttive -->
 <div class="pg" id="pTC">
-<div class="sec-title">Azioni correttive</div>
+<div class="sec-title">Azioni correttive del flusso regionale</div>
 
 <div class="field">
   <label>6. In caso di scarto del record, viene trasmesso un ritorno informativo all'Azienda?</label>
@@ -481,7 +481,7 @@ textarea{resize:vertical;min-height:64px}
 
 <!-- O-B: Azioni correttive -->
 <div class="pg" id="pOB">
-<div class="sec-title">Azioni correttive</div>
+<div class="sec-title">Azioni correttive del flusso regionale</div>
 
 <div class="field">
   <label>3. Viene monitorata la correzione degli scarti da parte delle Aziende?</label>
@@ -563,7 +563,7 @@ textarea{resize:vertical;min-height:64px}
   <label>8. Sono presenti degli indicatori su Siver?</label>
   <div class="rg" id="rg_o14"></div>
   <div class="cond" id="cd_o14si">
-    <label>Specificare come avviene il monitoraggio degli indicatori su Siver</label>
+    <label>Specificare quali indicatori sono presenti e come avviene il monitoraggio</label>
     <textarea id="tx_o14" placeholder="Specificare come avviene il monitoraggio su Siver..."></textarea>
   </div>
 </div>
@@ -674,7 +674,7 @@ var rgConf={
 // Radio groups with "Non so" option
 var rgNonSo=['rg_o3','rg_o5'];
 // Radio groups with "Non applicabile" option
-var rgNonApp=['rg_t14','rg_o3','rg_t6'];
+var rgNonApp=['rg_t14','rg_o3','rg_t6','rg_t35'];
 
 function buildRGs(){
   Object.keys(rgConf).forEach(function(id){
@@ -871,9 +871,9 @@ function go(pid,step,tot){
   document.getElementById('pf').style.width=pct+'%';
   var labels={
     'p0':'Selezione ruolo',
-    'pTA':'Identificazione','pTB':'Livelli di controllo','pTC':'Azioni correttive',
+    'pTA':'Identificazione','pTB':'Livelli di controllo','pTC':'Azioni correttive del flusso regionale',
     'pTD':'Enti terzi','pTE':'Reportistica','pTF':'Gestione del flusso',
-    'pOA':'Identificazione','pOB':'Azioni correttive','pOC':'Reportistica','pOD':'Gestione del flusso',
+    'pOA':'Identificazione','pOB':'Azioni correttive del flusso regionale','pOC':'Reportistica','pOD':'Gestione del flusso',
     'pSum':'Riepilogo'
   };
   document.getElementById('prog-lbl').textContent=labels[pid]||'';
@@ -890,10 +890,10 @@ function getTData(){
     {s:'Livelli di controllo',q:'Fasi attive in SISEPS',a:getCk3()},
     {s:'Livelli di controllo',q:'Controlli logico-formali scartanti (SISEPS)',a:getRLabel('rg_t4')+(v('tx_t4')?'\n↳ '+v('tx_t4'):'')},
     {s:'Livelli di controllo',q:'Controlli logico-formali scartanti (applicativo)',a:getRLabel('rg_t5')+(v('tx_t5')?'\n↳ '+v('tx_t5'):'')},
-    {s:'Azioni correttive',q:'Ritorno informativo in caso di scarto',a:getRLabel('rg_t6')+(v('tx_t7')?'\n↳ '+v('tx_t7'):'')},
-    {s:'Azioni correttive',q:'Gestione presidiata dal referente tecnico',a:getRLabel('rg_t8')+(v('tx_t9')?'\n↳ '+v('tx_t9'):'')},
-    {s:'Azioni correttive',q:'Monitoraggio correzione scarti',a:getRLabel('rg_t10')+(v('tx_t11')?'\n↳ '+v('tx_t11'):'')},
-    {s:'Azioni correttive',q:'Solleciti alle Aziende',a:getRLabel('rg_t12')+(v('tx_t13')?'\n↳ '+v('tx_t13'):'')},
+    {s:'Azioni correttive del flusso regionale',q:'Ritorno informativo in caso di scarto',a:getRLabel('rg_t6')+(v('tx_t7')?'\n↳ '+v('tx_t7'):'')},
+    {s:'Azioni correttive del flusso regionale',q:'Gestione presidiata dal referente tecnico',a:getRLabel('rg_t8')+(v('tx_t9')?'\n↳ '+v('tx_t9'):'')},
+    {s:'Azioni correttive del flusso regionale',q:'Monitoraggio correzione scarti',a:getRLabel('rg_t10')+(v('tx_t11')?'\n↳ '+v('tx_t11'):'')},
+    {s:'Azioni correttive del flusso regionale',q:'Solleciti alle Aziende',a:getRLabel('rg_t12')+(v('tx_t13')?'\n↳ '+v('tx_t13'):'')},
     {s:'Enti Terzi',q:'Trascodifica gestita da fornitore/ref. tecnico',a:getRLabel('rg_t14')+(v('tx_t15')?'\n↳ '+v('tx_t15'):'')},
     {s:'Enti Terzi',q:'Trasmissione gestita dal ref. tecnico',a:na14?'N/A':getRLabel('rg_t16')+(v('tx_t17')?'\n↳ '+v('tx_t17'):'')},
     {s:'Enti Terzi',q:'Aperture eccezionali sistematiche',a:na14?'N/A':getRLabel('rg_t18')+(v('tx_t19')?'\n↳ '+v('tx_t19'):'')},
@@ -915,9 +915,9 @@ function getOData(){
   var d=[
     {s:'Identificazione',q:'Flusso di riferimento',a:v('o_fl')||'—'},
     {s:'Identificazione',q:'Referenti',a:v('o_ref')||'—'},
-    {s:'Azioni correttive',q:'Monitoraggio correzione scarti',a:getRLabel('rg_o3')+(v('tx_o4')?'\n↳ '+v('tx_o4'):'')},
-    {s:'Azioni correttive',q:'Solleciti alle Aziende',a:getRLabel('rg_o5')+(v('tx_o6')?'\n↳ '+v('tx_o6'):'')},
-    {s:'Azioni correttive',q:'Coinvolgimento ref. organizzativo per adeguamento specifiche',a:getRLabel('rg_o7')+(v('tx_o8')?'\n↳ '+v('tx_o8'):'')},
+    {s:'Azioni correttive del flusso regionale',q:'Monitoraggio correzione scarti',a:getRLabel('rg_o3')+(v('tx_o4')?'\n↳ '+v('tx_o4'):'')},
+    {s:'Azioni correttive del flusso regionale',q:'Solleciti alle Aziende',a:getRLabel('rg_o5')+(v('tx_o6')?'\n↳ '+v('tx_o6'):'')},
+    {s:'Azioni correttive del flusso regionale',q:'Coinvolgimento ref. organizzativo per adeguamento specifiche',a:getRLabel('rg_o7')+(v('tx_o8')?'\n↳ '+v('tx_o8'):'')},
     {s:'Reportistica',q:'Dimensioni di qualità coperte',a:getCkRep('ck9','tx9')},
     {s:'Reportistica',q:'Incontri periodici con le Aziende',a:getRLabel('rg_o10')+(v('tx_o11')?'\n↳ '+v('tx_o11'):'')+(v('tx_o10no')?'\n↳ '+v('tx_o10no'):'')},
     {s:'Reportistica',q:'Reportistica al di fuori di ReportER',a:getRLabel('rg_o12')+(v('tx_o13')?'\n↳ '+v('tx_o13'):'')},
